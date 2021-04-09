@@ -23,7 +23,6 @@ class MyHandler(BaseHTTPRequestHandler):
 
 
     def do_GET(s):
-        global custom_parameters, custommerInfo, variablesToReplace, custommerInfoToChange
         """Respond to a GET request."""
         s.send_response(200)
         s.send_header("Content-type", "text/html")
@@ -53,9 +52,9 @@ class MyHandler(BaseHTTPRequestHandler):
                 UItext = UItext.replace(custommerInfoToChange[i], str(custommerInfo[i])) # the data about the customer
 
             UItext = UItext.replace('#messageToCustomer#', messageToCustomer) # handeling error messages to the customer
-
-            s.wfile.write(bytes(UItext, 'utf-8')) # writing to the local host
             """
+            s.wfile.write(bytes(UItext, 'utf-8')) # writing to the local host
+        """
         elif path.find("/yourParameters") != -1:
             s.send_response(200)
             s.send_header("Content-type", "text/html")
@@ -85,13 +84,11 @@ class MyHandler(BaseHTTPRequestHandler):
             orderAcceptedMsg = open("HTML/orderAccepted.html", 'r')
             orderMsgText = orderAcceptedMsg.read()
             s.wfile.write(bytes(orderMsgText, 'utf-8'))# writing to the local host
-         
+         """
 
     def do_POST(s):
         #allowing us to edit the custom parameters
-        global custom_parameters, messageToCustomer, custommerInfo, yourLocation
-        
-        
+
         s.send_response(200)
         s.send_header("Content-type", "text/html")
         s.end_headers()
@@ -106,18 +103,9 @@ class MyHandler(BaseHTTPRequestHandler):
             param_line = post_body.decode()
             #print("param line", param_line)
 
-			#making a string to print
-            global print_order, yourLocation
-            print_order = ""
-
-            custom_parameters = stringSplit(custom_parameters, param_line)
-            
-            
-
-            
 			# check if input is valid
-            errorMsg = checkCustomerInput(num_eq, eq_size_list, eq_pos, eq_in_out, env_size, startPoint, endPoint, num_node_ax, pipDia)
-
+            
+            """
             messageToCustomer = "Something wrong has happened.<br>"
             inputError = False
             for i in errorMsg: # going through the error messages
@@ -129,7 +117,7 @@ class MyHandler(BaseHTTPRequestHandler):
                     ...
             if not inputError:
                 messageToCustomer = "Your system is accepted."
-
+            """
 
             # take picture of the drawCustomerInfo 
                 # calling drawGivenInfo.py
@@ -145,24 +133,7 @@ class MyHandler(BaseHTTPRequestHandler):
             content_len = int(s.headers.get('Content-Length'))
             post_body = s.rfile.read(content_len)
             param_line = post_body.decode()
-            
-            # string parsing av customer info ( name, number..)
-            custommerInfo = stringSplit(custommerInfo, param_line)
-            name= custommerInfo[0]
-            pNumber= custommerInfo[1]
-            eMail= custommerInfo[2]
-            compName= custommerInfo[3]
 
-            systemPathObject = pathInterpreter.pipeSystem(num_eq, eq_size_list, eq_pos, eq_in_out, env_size, startPoint, endPoint, num_node_ax, pipDia)
-            systemPath = systemPathObject.makePath()
-            
-
-            # give new path to dfa template:
-                # input params: new path list, env_size, eq_size_list, eq_pos, pipDia, company_name, custommer name.
-            # save a file with new 
-            filename = makeDFA(num_eq, eq_size_list, eq_pos,eq_in_out, env_size, startPoint, endPoint, pipDia, custommerInfo, systemPath, yourLocation)
-
-            print("The order from ", name, ", ", compName, " is now stored in the folder 'GeneratedSystems' as ", filename, ".")
             s.do_GET()
 
 
