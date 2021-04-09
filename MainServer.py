@@ -23,7 +23,6 @@ class MyHandler(BaseHTTPRequestHandler):
 
 
     def do_GET(s):
-        global custom_parameters, custommerInfo, variablesToReplace, custommerInfoToChange
         """Respond to a GET request."""
         s.send_response(200)
         s.send_header("Content-type", "text/html")
