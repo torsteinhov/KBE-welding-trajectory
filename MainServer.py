@@ -97,7 +97,7 @@ class MyHandler(BaseHTTPRequestHandler):
 
 		# Check what is the path
         path = s.path
-        if path.find("/yourParameters") != -1:
+        if path.find("/action_page.php") != -1:
             content_len = int(s.headers.get('Content-Length'))
             post_body = s.rfile.read(content_len)
             param_line = post_body.decode()
@@ -157,3 +157,15 @@ def stringSplit(paramContainer, param_line):
             paramContainer[i]= paramContainer[i].replace("+", " ")
 
     return paramContainer
+
+
+if __name__ == '__main__':
+
+	server_class = HTTPServer
+	httpd = server_class((HOST_NAME, PORT_NUMBER), MyHandler)
+	
+	try:
+		httpd.serve_forever()
+	except KeyboardInterrupt:
+		pass
+	httpd.server_close()
