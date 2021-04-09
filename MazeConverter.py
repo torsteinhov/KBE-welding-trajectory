@@ -19,19 +19,31 @@ def convert2binary(filename):
 
     # Numpy arrays are best processed in Python
     nim = np.array(binary)
-    #adds white space around the maze
-    np.append(nim,np.ones(len(nim)))
-    print(nim.shape)
-    print(type(nim))
-    #return(nim)
+
+    #adds white space around the maze to simplify search for the WeldingProcessor, it therefore only has to check space in front of and under
+    verticalVector = np.full(shape=h,fill_value=1,dtype=np.int).reshape(len(nim),1)
+    horizontalVector = np.full(shape=w+2,fill_value=1,dtype=np.int)
+    '''
+    print("verticalVector: ",verticalVector)
+    print("horizontalVector: ", horizontalVector)
+    print("shape horizontalVector: ", horizontalVector.shape)
+    print("shape verticalVector: ", verticalVector.shape)
+    print("shape nim: ", nim.shape)
+    '''
+
+    Img = np.block([[horizontalVector],[verticalVector,nim,verticalVector],[horizontalVector]])
+
+    print(type(Img))
+    return Img
 
     #for illustration in terminal
-    
-    for row in range(h):
-        for column in range(w):
-            print(nim[row,column],end='')
+    '''
+    for row in range(h+2):
+        for column in range(w+2):
+            print(Img[row,column],end='')
         print()
+    '''
     
     
 #convert2binary('maze_curvy.png')
-convert2binary('maze_test.png')
+#convert2binary('maze_test.png')

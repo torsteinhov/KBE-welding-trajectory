@@ -4,34 +4,42 @@ print(convert2binary('maze_test.png'))
 binaryMaze = convert2binary('maze_test.png')
 
 def makeWeldLines(binaryMaze):
+    print("type binaryMaze: ", type(binaryMaze))
+    for i in range(1,len(binaryMaze)-1):
+        for j in range(1,len(binaryMaze[0])-1):
+            if binaryMaze[i][j] == 1 and binaryMaze[i+1][j] == 0:
+                binaryMaze[i][j] = 2
+            if binaryMaze[i][j] == 1 and binaryMaze[i][j+1] == 0:
+                binaryMaze[i][j] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i+1][j] == 1:
+                binaryMaze[i+1][j] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i][j+1] == 1:
+                binaryMaze[i][j+1] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i+1][j+1] == 1:
+                binaryMaze[i+1][j+1] = 2
+            if binaryMaze[i+1][j+1] == 0 and binaryMaze[i][j] == 1:
+                binaryMaze[i][j] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i+1][j+1] == 1:
+                binaryMaze[i+1][j+1] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i+1][j-1] == 1:
+                binaryMaze[i+1][j-1] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i+1][j+1] == 1:
+                binaryMaze[i+1][j+1] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i-1][j-1] == 1:
+                binaryMaze[i-1][j-1] = 2
+            if binaryMaze[i][j] == 0 and binaryMaze[i-1][j+1] == 1:
+                binaryMaze[i-1][j+1] = 2
+
+    print(binaryMaze)
 
     '''
-    for i in range(len(binaryMaze)):
-        for j in range(len(binaryMaze[0])):
 
-            if i == 0 and j == 0:
-                #what happens in first element
-
-            elif i == len(binaryMaze)-1 and j == len(binaryMaze[0])-1:
-                #what happens in last element
-
-            elif i == 0 and j == len(binaryMaze[0])-1:
-                #what happens in top right corner element
-
-            elif i == len(binaryMaze)-1 and j == 0:
-                #what happens in bottom left corner element
-
-            elif i == 0:
-                #what happens in first row    
-
-            elif i == len(binaryMaze)-1:
-                #what happens in last row
-
-            elif j == 0:
-                #what happens in first column
+    for row in range(len(binaryMaze)):
+        for column in range(len(binaryMaze[0])):
+            print(binaryMaze[row,column],end='')
+        print()
             
-            elif j == len(binaryMaze[0])-1:
-                #what happens in last column
+    '''
+    return binaryMaze
 
-            else:
-    '''       
+print(makeWeldLines(binaryMaze))
