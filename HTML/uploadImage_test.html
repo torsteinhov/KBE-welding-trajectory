@@ -4,9 +4,9 @@
 
 <h1>The input accept attribute</h1>
 
-<form action="/action_page.php">
+<form action="/action_page.php" method= "POST" enctype="multipart/form-data" accept-charset="">
   <label for="img">Select image:</label>
-  <input type="file" id="img" name="img" accept="image/*">
+  <input type="file" id="img" name="file" accept=".jpg, .png">
   <input type="submit">
 </form>
 <script>
@@ -17,3 +17,4 @@
 
 </body>
 </html>
+
