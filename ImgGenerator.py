@@ -4,20 +4,13 @@ from PIL import Image
 from MazeConverter import convert2binary
 from WeldingProcessor import makeWeldLines
 
-binaryMaze = convert2binary('maze_test.png')
+binaryMaze = convert2binary('maze_test2.png')
 
 def convert2Img():
 
     pixels = makeWeldLines(binaryMaze)
     
-    for row in range(len(pixels)):
-        for column in range(len(pixels[0])):
-            print(pixels[row,column],end='')
-        print()
-
-    print("hey")
-    img = Image.fromarray(pixels,mode='RGB')
-    print("hey")
-    img = img.save("finished_processed.png")
+    img = Image.fromarray(pixels,mode='CMYK')
+    img = img.save("finished_processed.jpg")
 
 convert2Img()

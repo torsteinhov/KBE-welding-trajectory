@@ -17,8 +17,10 @@ def convert2binary(filename):
     binary = im.point(lambda p: p > threshold)
 
     # Resize to be able to illustrate in terminal, can be removed when finalizing
+    '''
     binary = binary.resize((w//2,h//2),Image.NEAREST)
     w, h = binary.size
+    '''
 
     # Numpy arrays are best processed in Python
     nim = np.array(binary)
