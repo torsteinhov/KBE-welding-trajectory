@@ -7,6 +7,8 @@ import json
 import math
 import random
 
+import cgi
+
 HOST_NAME = '127.0.0.1' 
 PORT_NUMBER = 1234
 
@@ -16,30 +18,30 @@ yourLocation = Aashild #must be changed after whom is using it
 
 class MyHandler(BaseHTTPRequestHandler):
 
-    def do_HEAD(s):
-        s.send_response(200)
-        s.send_header("Content-type", "text/html")
-        s.end_headers()
+    def do_HEAD(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
 
 
-    def do_GET(s):
+    def do_GET(self):
         """Respond to a GET request."""
-        s.send_response(200)
-        s.send_header("Content-type", "text/html")
-        s.end_headers()
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
 
         # Check what is the path
-        path = s.path
+        path = self.path
         
         if path.find("/") != -1 and len(path) == 1:
             startPage = open("HTML/startPage.HTML", 'r')
             startPageText = startPage.read()
-            s.wfile.write(bytes(startPageText, 'utf-8'))
+            self.wfile.write(bytes(startPageText, 'utf-8'))
 
         elif path.find("/orderWeldingLines") != -1:
-            s.send_response(200)
-            s.send_header("Content-type", "text/html")
-            s.end_headers()
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
 
             userInterface = open("HTML/uploadImage_test.html", "r") #reading the userinterface html-page
             UItext = userInterface.read()
@@ -53,12 +55,12 @@ class MyHandler(BaseHTTPRequestHandler):
 
             UItext = UItext.replace('#messageToCustomer#', messageToCustomer) # handeling error messages to the customer
             """
-            s.wfile.write(bytes(UItext, 'utf-8')) # writing to the local host
+            self.wfile.write(bytes(UItext, 'utf-8')) # writing to the local host
         """
         elif path.find("/yourParameters") != -1:
-            s.send_response(200)
-            s.send_header("Content-type", "text/html")
-            s.end_headers()
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
 
             userInterface = open("HTML/userInterface.html", "r") #reading the userinterface html-page
             UItext = userInterface.read()
@@ -74,35 +76,50 @@ class MyHandler(BaseHTTPRequestHandler):
 
             UItext = UItext.replace('#messageToCustomer#', messageToCustomer) # handeling error messages to the customer
 
-            s.wfile.write(bytes(UItext, 'utf-8')) # writing to the local host
+            self.wfile.write(bytes(UItext, 'utf-8')) # writing to the local host
 
         elif path.find("/sendOrder") != -1:
-            s.send_response(200)
-            s.send_header("Content-type", "text/html")
-            s.end_headers()
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
             
             orderAcceptedMsg = open("HTML/orderAccepted.html", 'r')
             orderMsgText = orderAcceptedMsg.read()
-            s.wfile.write(bytes(orderMsgText, 'utf-8'))# writing to the local host
+            self.wfile.write(bytes(orderMsgText, 'utf-8'))# writing to the local host
          """
 
-    def do_POST(s):
+    def do_POST(self):
         #allowing us to edit the custom parameters
 
-        s.send_response(200)
-        s.send_header("Content-type", "text/html")
-        s.end_headers()
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
 
         
 
 		# Check what is the path
-        path = s.path
+        path = self.path
         if path.find("/action_page.php") != -1:
-            content_len = int(s.headers.get('Content-Length'))
-            post_body = s.rfile.read(content_len)
+            form = cgi.FieldStorage(
+                fp=self.rfile,
+                headers=self.headers,
+                environ={'REQUEST_METHOD':'POST',
+                         'CONTENT_TYPE':self.headers['Content-Type'],
+                         })
+            filename = form['file'].filename
+            data = form['file'].file.read()
+            print(form['file'].file.read())
+            print("filename: ", filename)
+            open("/%s"%filename, "wb").write(data)
+            print (self.headers['content-length'])
+            self.respond("uploaded %s, thanks")
+
+            """
+            content_len = int(self.headerself.get('Content-Length'))
+            post_body = self.rfile.read(content_len)
             param_line = post_body.decode()
             #print("param line", param_line)
-
+            """
 			# check if input is valid
             
             """
@@ -127,21 +144,21 @@ class MyHandler(BaseHTTPRequestHandler):
             
             
 
-            s.do_GET() #this is not a optimal solution
+            self.do_GET() #this is not a optimal solution
 
         elif path.find("/sendOrder") != -1:
-            content_len = int(s.headers.get('Content-Length'))
-            post_body = s.rfile.read(content_len)
+            content_len = int(self.headerself.get('Content-Length'))
+            post_body = self.rfile.read(content_len)
             param_line = post_body.decode()
 
-            s.do_GET()
+            self.do_GET()
 
 
         elif path.find("/"):
-            content_len = int(s.headers.get('Content-Length'))
-            post_body = s.rfile.read(content_len)
+            content_len = int(self.headerself.get('Content-Length'))
+            post_body = self.rfile.read(content_len)
             param_line = post_body.decode()
-            s.wfile.write(bytes('<p>' + param_line + '</p>', 'utf-8'))
+            self.wfile.write(bytes('<p>' + param_line + '</p>', 'utf-8'))
 
 def stringSplit(paramContainer, param_line):
     if param_line.find("%2C"): # replacing "%2C" with ','
