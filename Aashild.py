@@ -36,6 +36,7 @@ from werkzeug.utils import secure_filename # for å sjekke om det er et farlig f
 
 app.config["IMAGE_UPLOADS"] = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\HTML\\customerIMG"
 app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF"]
+app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 *1024 #ET LITE BILDE
 
 def allowed_image(filename):
   if not "." in filename:
@@ -47,6 +48,14 @@ def allowed_image(filename):
   else:
     return False
 
+def allowed_image_filesize(filesize):
+
+  if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+    return True
+  else:
+    return False
+
+
 @app.route("/upload-image", methods = ["GET", "POST"])
 def upload_image():
 
@@ -54,6 +63,10 @@ def upload_image():
 
     if request.files:
 
+      print(request.cookies)
+      if not allowed_image_filesize(request.cookies): #sjekker filstørrelsen
+        print("File exeeded maximum size")
+        return redirect(request.url)
 
       image = request.files["image"] #store the file in this variable
       #print(image)

@@ -32,7 +32,8 @@
 <script>
 
  function filesize(elem){
-     console.log(elem.files[0].size)
+
+     document.cookie = `filesize=${elem.files[0].size}`;
  }
 </script>
 

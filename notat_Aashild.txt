@@ -1,0 +1,11 @@
+- to make a requirements file:
+    pip freeze > requirements.txt
+- to install the requirements
+    pip install -r requirements
+
+Navn på css: sylesheat.css
+
+
+Webbrowser: inspiser > network > check på Network (noe med chache)
+
+Jinja: default engine templates
