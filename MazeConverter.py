@@ -6,16 +6,21 @@ def convert2binary(filename):
     im = Image.open(filename).convert('L')
     # Gets the dimensions
     w, h = im.size
+    '''
     print("width: ", w)
     print("height: ", h)
+    print("im: ", im)
+    '''
 
     # We now have greyscale but we want every shade of grey to be 0 and white to be 1
     threshold = 128
     binary = im.point(lambda p: p > threshold)
 
     # Resize to be able to illustrate in terminal, can be removed when finalizing
+    '''
     binary = binary.resize((w//2,h//2),Image.NEAREST)
     w, h = binary.size
+    '''
 
     # Numpy arrays are best processed in Python
     nim = np.array(binary)
@@ -28,12 +33,11 @@ def convert2binary(filename):
     print("horizontalVector: ", horizontalVector)
     print("shape horizontalVector: ", horizontalVector.shape)
     print("shape verticalVector: ", verticalVector.shape)
-    print("shape nim: ", nim.shape)
+    print("nim: ", nim)
     '''
 
     Img = np.block([[horizontalVector],[verticalVector,nim,verticalVector],[horizontalVector]])
 
-    print(type(Img))
     return Img
 
     #for illustration in terminal
