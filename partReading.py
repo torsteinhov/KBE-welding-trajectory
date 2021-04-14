@@ -13,12 +13,14 @@ import NXOpen.Preferences
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
+path = aashild_path
 #**** Finding all the edges in PRT file
 # NX 1957
 # Journal created by andreilo on Mon Apr 12 13:22:45 2021 W. Europe Daylight Time
 #
 import math
 import NXOpen
+"""
 def main() : 
 
 	theSession  = NXOpen.Session.GetSession()
@@ -27,7 +29,7 @@ def main() :
 	# ----------------------------------------------
 	#   Menu: File->Open...
 	# ----------------------------------------------
-	basePart1, partLoadStatus1 = theSession.Parts.OpenActiveDisplay(torstein_path, NXOpen.DisplayPartOption.AllowAdditional)
+	basePart1, partLoadStatus1 = theSession.Parts.OpenActiveDisplay(aashild_path, NXOpen.DisplayPartOption.AllowAdditional)
 	
 	workPart = theSession.Parts.Work # maze
 	displayPart = theSession.Parts.Display # maze
@@ -35,27 +37,55 @@ def main() :
 	# ----------------------------------------------
 	#   Menu: Tools->Journal->Stop Recording
 	# ----------------------------------------------
+"""
+def loadPRTFile(path):
+	theSession  = NXOpen.Session.GetSession()
+	workPart = theSession.Parts.Work
+	displayPart = theSession.Parts.Display
 
-def getFaces():
+	basePart1, partLoadStatus1 = theSession.Parts.OpenActiveDisplay(path, NXOpen.DisplayPartOption.AllowAdditional)
+	
+	workPart = theSession.Parts.Work # maze
+	displayPart = theSession.Parts.Display # maze
+	partLoadStatus1.Dispose()
+
+	return theSession
+
+
+def getFaces(theSession):
 	theSession  = NXOpen.Session.GetSession()
 	#workPart = theSession.Parts.Work
-		
+	objects = []	
 	for partObject in theSession.Parts:
-		processPart(partObject)
+		objects.append(processPart(partObject))
+	
+	print("objects: \n", objects)
+	return objects
 		
 def processPart(partObject):
+	parts = []
 	for bodyObject in partObject.Bodies:
-		processBodyFaces(bodyObject)
+		parts.append(processBodyFaces(bodyObject))
 		#processBodyEdges(bodyObject)
+	
+	print("Parts: \n", parts)
+	return parts
 			
 def processBodyFaces(bodyObject):
+	faces = []
 	for faceObject in bodyObject.GetFaces():
-		processFace(faceObject)
+		faces.append(processFace(faceObject))
+	
+	print("Faces: \n", faces)
+	return faces
 			
 def processFace(faceObject):
 	print("Face found.")
+	lines_in_face = []
 	for edgeObject in faceObject.GetEdges():
-		processEdge(edgeObject)
+		lines_in_face.append(processEdge(edgeObject))
+	print("lines in face: \n", lines_in_face)
+	return lines_in_face
 		
 def processEdge(edgeObject):
 	#Printing vertices
@@ -64,10 +94,13 @@ def processEdge(edgeObject):
 	print("Vertex 1:", v1)
 	print("Vertex 2:", v2)
 
-	
-	return v1,v2
+	line =[v1,v2]
+	return line
 
-if __name__ == '__main__':
-	main()
-	getFaces()
+#if __name__ == '__main__':
+	#main()
+theSession = loadPRTFile(path)
+objects = getFaces(theSession)
+aPoint= objects[0][0][0][0][0]
+print("a Point: ", aPoint)
 
