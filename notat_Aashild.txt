@@ -9,3 +9,7 @@ Navn på css: sylesheat.css
 Webbrowser: inspiser > network > check på Network (noe med chache)
 
 Jinja: default engine templates
+video6: 
+
+Further development:
+- suggest which is the best way to weld: hvilken rekkefølge er best å sveise i . 
