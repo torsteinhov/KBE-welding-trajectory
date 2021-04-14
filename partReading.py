@@ -64,6 +64,9 @@ def processEdge(edgeObject):
 	print("Vertex 1:", v1)
 	print("Vertex 2:", v2)
 
+	
+	return v1,v2
+
 if __name__ == '__main__':
 	main()
 	getFaces()
