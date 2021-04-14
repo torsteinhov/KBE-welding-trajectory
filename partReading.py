@@ -14,30 +14,8 @@ import NXOpen.Preferences
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 path = aashild_path
-#**** Finding all the edges in PRT file
-# NX 1957
-# Journal created by andreilo on Mon Apr 12 13:22:45 2021 W. Europe Daylight Time
-#
-import math
-import NXOpen
-"""
-def main() : 
 
-	theSession  = NXOpen.Session.GetSession()
-	workPart = theSession.Parts.Work
-	displayPart = theSession.Parts.Display
-	# ----------------------------------------------
-	#   Menu: File->Open...
-	# ----------------------------------------------
-	basePart1, partLoadStatus1 = theSession.Parts.OpenActiveDisplay(aashild_path, NXOpen.DisplayPartOption.AllowAdditional)
-	
-	workPart = theSession.Parts.Work # maze
-	displayPart = theSession.Parts.Display # maze
-	partLoadStatus1.Dispose()
-	# ----------------------------------------------
-	#   Menu: Tools->Journal->Stop Recording
-	# ----------------------------------------------
-"""
+
 def loadPRTFile(path):
 	theSession  = NXOpen.Session.GetSession()
 	workPart = theSession.Parts.Work
@@ -99,8 +77,8 @@ def processEdge(edgeObject):
 
 #if __name__ == '__main__':
 	#main()
-theSession = loadPRTFile(path)
-objects = getFaces(theSession)
-aPoint= objects[0][0][0][0][0]
-print("a Point: ", aPoint)
+#theSession = loadPRTFile(path)
+#objects = getFaces(theSession)
+#aPoint= objects[0][0][0][0][0]
+#print("a Point: ", aPoint)
 
