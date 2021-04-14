@@ -11,7 +11,8 @@ import NXOpen.Preferences
 
 #import NXOpen.BasePart
 
-path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
+aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
+torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 #**** Finding all the edges in PRT file
 # NX 1957
 # Journal created by andreilo on Mon Apr 12 13:22:45 2021 W. Europe Daylight Time
@@ -26,7 +27,7 @@ def main() :
 	# ----------------------------------------------
 	#   Menu: File->Open...
 	# ----------------------------------------------
-	basePart1, partLoadStatus1 = theSession.Parts.OpenActiveDisplay(path, NXOpen.DisplayPartOption.AllowAdditional)
+	basePart1, partLoadStatus1 = theSession.Parts.OpenActiveDisplay(torstein_path, NXOpen.DisplayPartOption.AllowAdditional)
 	
 	workPart = theSession.Parts.Work # maze
 	displayPart = theSession.Parts.Display # maze
