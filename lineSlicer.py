@@ -9,7 +9,7 @@ from partReading import loadPRTFile, getFaces
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-path = torstein_path
+path = aashild_path
 
 # find the face with most lines
 def findBasePlane():
@@ -33,6 +33,8 @@ def findBasePlane():
 #iterates through a list of two NXOpen 3DPoint Objects and returns start and end point of the line in format [[X,Y,Z],[X,Y,Z]]
 def findPoints(line):
     twoPoints = []
+    print("line in find points: ", line)
+    print("type: ", type(line))
     for point in line:
         strPoint = str(point)
         strPoint = strPoint.split(",")
@@ -51,10 +53,10 @@ def findPoints(line):
 #line = [[x=50,y=100,z=0],[x=50,y=100,z=0],[x=50,y=100,z=0]]
 #point = [x=50,y=100,z=0]
 
-testPlane = findBasePlane()
 
-def findBorderLine(basePlane):
 
+def removeBorderLine(basePlane):
+    basePlaneCopy = basePlane
     lineNumberIndex = 0
     x_val = 0
     for i, line in enumerate(basePlane):
@@ -63,17 +65,26 @@ def findBorderLine(basePlane):
         for j in points:
             if j[0] > x_val:
                 lineNumberIndex = i
-        
+                basePlaneCopy.pop(i)
+    borderLines = [] #[line, line]
     borderLine1 = basePlane[lineNumberIndex]
-
-    for i in borderLine1:
-        for j in basePlane:
-            if i == j[0] or i == j[1]:
-        
-        
-
-
-
-        
-        # hvis x>x-val
-            #lineNumberIndex=i
+    borderLines.append(borderLine1)
+    
+    borderUnCompleted = True
+    
+    while borderUnCompleted:
+        for i, line in basePlaneCopy:
+            lineNum = findPoints(line)
+            if lineNum[1] == borderLines[0][0]: #borderLine1[1] # if endpoint of last line is the same as the startpoint on next line
+                borderLine2 = lineNum
+                borderLines.append(borderLine2)
+                basePlaneCopy.pop(i)
+                break
+        if borderLines[0][0] == borderLines[-1][1]:
+            borderUnCompleted = True
+    
+    return basePlaneCopy #the base plane without borders
+    
+########testing123############
+testPlane = findBasePlane()
+basePlaneWithoutBorders = removeBorderLine(testPlane)
