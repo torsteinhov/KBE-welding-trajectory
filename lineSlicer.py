@@ -112,6 +112,9 @@ def removeBorderLines(basePlane):
 
     return basePlaneCopy #weldinglines
 
+def blendWeldingLines(weldinglines):
+    ...
+
 
 
 ########testing123############
