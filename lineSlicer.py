@@ -9,7 +9,7 @@ from partReading import loadPRTFile, getFaces
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-path = aashild_path
+path = torstein_path
 
 # find the face with most lines
 def findBasePlane():
@@ -35,10 +35,12 @@ def findPoints(line):
     twoPoints = []
     print("line in find points: ", line)
     print("type: ", type(line))
+    #must make point a iterable object
     for point in line:
         strPoint = str(point)
         strPoint = strPoint.split(",")
         pointList = []
+        print("strPoint: ", strPoint)
         for i in strPoint:
             pkt = i.split("=")[1]
             if pkt.find("]"):
