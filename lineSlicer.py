@@ -32,20 +32,22 @@ def findBasePlane():
 
 testPlane = findBasePlane()
 lineNumberIndex = 0
-x-val = 0
+x_val = 0
 for i, line in enumerate(testPlane):
     print("Line: ", line)
     print("points: ", line[0], line[1])
     print("type point: ", type(str(line[0])))
-    print("x-val: ", line[0][0])
+    
 
     for point in line:
         strPoint = str(line[0])
         strPoint = strPoint.split(",")
         pointList = []
         for i in strPoint:
-            i = strPoint.split("=")
-            pointList.append(i[-1])
+            pkt = i.split("=")[1]
+            if pkt.find("]"):
+                pkt =pkt.split("]")[0]
+            pointList.append(round(float(pkt),1))
         print("pointList: ",pointList)
         
         
