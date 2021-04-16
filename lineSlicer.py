@@ -41,8 +41,20 @@ for i, line in enumerate(testPlane):
 
     for point in line:
         strPoint = str(line[0])
-        # finn x-verdi
-        #hvis x>x-val
-            #lineNumberIndex=i
+        strPoint = strPoint.split(",")
+        pointList = []
+        for i in strPoint:
+            i = strPoint.split("=")
+            pointList.append(i[-1])
+        print("pointList: ",pointList)
+        
+        
 
-    # finn 
+        # hvis x>x-val
+            #lineNumberIndex=i
+    
+    #basePlane = [line,line,line,line,line]
+    #line = [[x=50,y=100,z=0],[x=50,y=100,z=0],[x=50,y=100,z=0]]
+    #point = [x=50,y=100,z=0]
+
+    
