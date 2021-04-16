@@ -12,7 +12,7 @@ from partReading import loadPRTFile, getFaces
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-path = torstein_path
+path = aashild_path
 
 # find the face with most lines
 def findBasePlane():
@@ -138,17 +138,17 @@ def buildWeldingLines(weldinglines):
         dimensions = []
 
         zip_object = zip(startPoint, endPoint)
-        for startPoint, endPoint in zip_object:
-            dimensions.append(abs(startPoint-endPoint))
+        for startPoint_i, endPoint_i in zip_object:
+            dimensions.append(abs(startPoint_i-endPoint_i))
         
         print("dimensions: ", dimensions)
         print("dimensions[0]: ", dimensions[0])
         cylLength = math.sqrt(dimensions[0]**2+dimensions[1]**2+dimensions[2]**2)
 
-
+        print("endpoint[0]: ", endPoint[0])
         #startPoint:  [167.0, 122.0, 0.0]
         #endPoint:  [-138.0, 122.0, 0.0]
-        base1 = Cylinder(1670, 1220, 0, 10, cylLength, [-1, 0, 0], "YELLOW", "Wood")
+        base1 = Cylinder(endPoint[0], endPoint[1], endPoint[2], 10, cylLength, dimensions, "YELLOW", "Wood")
         base1.initForNX()
 
     
