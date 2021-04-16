@@ -59,6 +59,57 @@ def findPoints(line):
 #line = [[x=50,y=100,z=0],[x=50,y=100,z=0],[x=50,y=100,z=0]]
 #point = [x=50,y=100,z=0]
 
+def removeBorderLines(basePlane):
+    basePlaneCopy = basePlane
+    lineNumberIndex = 0
+    x_length = 0
+    for i, line in enumerate(basePlaneCopy):
+        print("Line(removeBorderLine): ", line)
+        points = findPoints(line)
+        if abs(points[0][0]-points[1][0]) > x_length:
+            x_length = abs(points[0][0]-points[1][0])
+            lineNumberIndex = i
+    print("lineNumberIndex: ", lineNumberIndex)
+    borderLines = [] #[line, line]
+    borderLines.append(findPoints(basePlaneCopy.pop(lineNumberIndex)))
+    print("Borderlines: ", borderLines)
+    print("BasePlaneCopy: ", basePlaneCopy)
+
+    x_length = 0
+    for i, line in enumerate(basePlaneCopy):
+        print("Line(removeBorderLine): ", line)
+        points = findPoints(line)
+        if abs(points[0][0]-points[1][0]) > x_length:
+            x_length = abs(points[0][0]-points[1][0])
+            lineNumberIndex = i
+    print("lineNumberIndex: ", lineNumberIndex)
+    borderLines.append(findPoints(basePlaneCopy.pop(lineNumberIndex)))
+    print("Borderlines: ", borderLines)
+    print("BasePlaneCopy: ", basePlaneCopy)
+
+    y_length = 0
+    for i, line in enumerate(basePlaneCopy):
+        print("Line(removeBorderLine): ", line)
+        points = findPoints(line)
+        if abs(points[0][1]-points[1][1]) > y_length:
+            y_length = abs(points[0][1]-points[1][1])
+            lineNumberIndex = i
+    print("lineNumberIndex: ", lineNumberIndex)
+    borderLines.append(findPoints(basePlaneCopy.pop(lineNumberIndex)))
+
+    y_length = 0
+    for i, line in enumerate(basePlaneCopy):
+        print("Line(removeBorderLine): ", line)
+        points = findPoints(line)
+        if abs(points[0][1]-points[1][1]) > y_length:
+            y_length = abs(points[0][1]-points[1][1])
+            lineNumberIndex = i
+    print("lineNumberIndex: ", lineNumberIndex)
+    borderLines.append(findPoints(basePlaneCopy.pop(lineNumberIndex)))
+
+    print("BorderLines: ", borderLines)
+    print("Lengde av basePlaneCopy etter popping: ", len(basePlaneCopy))
+
 
 """
 #this is not working
@@ -102,4 +153,5 @@ def removeBorderLine(basePlane):
 """
 ########testing123############
 testPlane = findBasePlane()
-basePlaneWithoutBorders = removeBorderLine(testPlane)
+basePlaneWithoutBorders = removeBorderLines(testPlane)
+print("Vi tar påskehelg")
