@@ -7,6 +7,7 @@ import NXOpen.Preferences
 import math
 
 from shapes.Cylinder import Cylinder
+from shapes.Sphere import Sphere
 
 from partReading import loadPRTFile, getFaces
 
@@ -148,8 +149,12 @@ def buildWeldingLines(weldinglines):
         print("endpoint[0]: ", endPoint[0])
         #startPoint:  [167.0, 122.0, 0.0]
         #endPoint:  [-138.0, 122.0, 0.0]
-        base1 = Cylinder(endPoint[0], endPoint[1], endPoint[2], 10, cylLength, dimensions, "YELLOW", "Wood")
+        weldingDia = 10
+        base1 = Cylinder(endPoint[0], endPoint[1], endPoint[2], weldingDia, cylLength, dimensions, "YELLOW", "Wood")
         base1.initForNX()
+
+        corners = Sphere(endPoint[0], endPoint[1], endPoint[2], weldingDia, "YELLOW", "Wood")
+        corners.initForNX()
 
     
 
