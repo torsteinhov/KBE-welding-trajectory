@@ -9,7 +9,7 @@ from partReading import loadPRTFile, getFaces
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-path = aashild_path
+path = torstein_path
 
 # find the face with most lines
 def findBasePlane():
@@ -30,17 +30,11 @@ def findBasePlane():
     print("len(baseplan): ", len(basePlane))
     return basePlane
 
-testPlane = findBasePlane()
-lineNumberIndex = 0
-x_val = 0
-for i, line in enumerate(testPlane):
-    print("Line: ", line)
-    print("points: ", line[0], line[1])
-    print("type point: ", type(str(line[0])))
-    
-
+#iterates through a list of two NXOpen 3DPoint Objects and returns start and end point of the line in format [[X,Y,Z],[X,Y,Z]]
+def findPoints(line):
+    twoPoints = []
     for point in line:
-        strPoint = str(line[0])
+        strPoint = str(point)
         strPoint = strPoint.split(",")
         pointList = []
         for i in strPoint:
@@ -49,14 +43,37 @@ for i, line in enumerate(testPlane):
                 pkt =pkt.split("]")[0]
             pointList.append(round(float(pkt),1))
         print("pointList: ",pointList)
+        twoPoints.append(pointList)
+    
+    return twoPoints
+
+#basePlane = [line,line,line,line,line]
+#line = [[x=50,y=100,z=0],[x=50,y=100,z=0],[x=50,y=100,z=0]]
+#point = [x=50,y=100,z=0]
+
+testPlane = findBasePlane()
+
+def findBorderLine(basePlane):
+
+    lineNumberIndex = 0
+    x_val = 0
+    for i, line in enumerate(basePlane):
+        
+        points = findPoints(line)
+        for j in points:
+            if j[0] > x_val:
+                lineNumberIndex = i
+        
+    borderLine1 = basePlane[lineNumberIndex]
+
+    for i in borderLine1:
+        for j in basePlane:
+            if i == j[0] or i == j[1]:
         
         
 
+
+
+        
         # hvis x>x-val
             #lineNumberIndex=i
-    
-    #basePlane = [line,line,line,line,line]
-    #line = [[x=50,y=100,z=0],[x=50,y=100,z=0],[x=50,y=100,z=0]]
-    #point = [x=50,y=100,z=0]
-
-    
