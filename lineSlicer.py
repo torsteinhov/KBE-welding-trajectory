@@ -139,7 +139,7 @@ def buildWeldingLines(weldinglines):
 
         zip_object = zip(startPoint, endPoint)
         for startPoint_i, endPoint_i in zip_object:
-            dimensions.append(abs(startPoint_i-endPoint_i))
+            dimensions.append(startPoint_i-endPoint_i)
         
         print("dimensions: ", dimensions)
         print("dimensions[0]: ", dimensions[0])
