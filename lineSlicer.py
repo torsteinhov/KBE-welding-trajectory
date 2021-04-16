@@ -110,47 +110,10 @@ def removeBorderLines(basePlane):
     print("BorderLines: ", borderLines)
     print("Lengde av basePlaneCopy etter popping: ", len(basePlaneCopy))
 
+    return basePlaneCopy #weldinglines
 
-"""
-#this is not working
-def removeBorderLine(basePlane):
-    basePlaneCopy = basePlane
-    lineNumberIndex = 0
-    x_val = 0
-    for i, line in enumerate(basePlane):
-        print("Line(removeBorderLine): ", line)
-        points = findPoints(line)
-        for j in points:
-            if j[0] > x_val:
-                x_val = j[0]
-                lineNumberIndex = i
-    print("lineNumberIndex: ", lineNumberIndex)
-    borderLines = [] #[line, line]
-    borderLines.append(findPoints(basePlaneCopy.pop(lineNumberIndex)))
-    print("Borderlines: ", borderLines)
-    print("BasePlaneCopy: ", basePlaneCopy)
-    
-    #borderLine1 = basePlane[lineNumberIndex]
-    #borderLines.append(borderLine1)
-    
-    borderUnCompleted = True
-    
-    while borderUnCompleted:
-        for i, line in enumerate(basePlaneCopy):
-            print("line in borderUnCompleted: ", line)
-            
-            lineNum = findPoints(line) #[float, float, float]
-            if lineNum[0] == borderLines[-1][1]: #borderLine1[1] # if endpoint of last line is the same as the startpoint on next line
-                borderLine2 = lineNum
-                borderLines.append(borderLine2)
-                testVar= basePlaneCopy.pop(i)
-                print("Poppede linje: ", testVar)
-                break
-        if borderLines[0][0] == borderLines[-1][1]:
-            borderUnCompleted = True
-    
-    return basePlaneCopy #the base plane without borders
-"""
+
+
 ########testing123############
 testPlane = findBasePlane()
 basePlaneWithoutBorders = removeBorderLines(testPlane)
