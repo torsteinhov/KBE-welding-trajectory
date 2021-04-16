@@ -4,6 +4,9 @@ import NXOpen.Annotations
 import NXOpen.Features
 import NXOpen.GeometricUtilities
 import NXOpen.Preferences
+import math
+
+from shapes.Cylinder import Cylinder
 
 from partReading import loadPRTFile, getFaces
 
@@ -109,15 +112,51 @@ def removeBorderLines(basePlane):
 
     print("BorderLines: ", borderLines)
     print("Lengde av basePlaneCopy etter popping: ", len(basePlaneCopy))
-
+    print("weldingLines", basePlaneCopy)
     return basePlaneCopy #weldinglines
 
-def blendWeldingLines(weldinglines):
-    ...
+'''
+[[<NXOpen.Point3d object at 0x000001B97631F6C0>, <NXOpen.Point3d object at 0x000001B97631F750>], 
+[<NXOpen.Point3d object at 0x000001B97631F720>, <NXOpen.Point3d object at 0x000001B97631F7B0>], 
+[<NXOpen.Point3d object at 0x000001B97631F780>, <NXOpen.Point3d object at 0x000001B97631F810>], 
+[<NXOpen.Point3d object at 0x000001B97631F7E0>, <NXOpen.Point3d object at 0x000001B97631F870>], 
+[<NXOpen.Point3d object at 0x000001B97631F840>, <NXOpen.Point3d object at 0x000001B97631F8D0>], 
+[<NXOpen.Point3d object at 0x000001B97631F8A0>, <NXOpen.Point3d object at 0x000001B97631F930>], 
+[<NXOpen.Point3d object at 0x000001B97631F900>, <NXOpen.Point3d object at 0x000001B97631F990>], 
+[<NXOpen.Point3d object at 0x000001B97631F960>, <NXOpen.Point3d object at 0x000001B97631F9F0>], 
+[<NXOpen.Point3d object at 0x000001B97631F9C0>, <NXOpen.Point3d object at 0x000001B97631FA50>], 
+[<NXOpen.Point3d object at 0x000001B97631FA20>, <NXOpen.Point3d object at 0x000001B97631FAB0>]]
+
+'''
+def buildWeldingLines(weldinglines):
+    for line in weldinglines:
+        points = findPoints(line)
+        startPoint = points[0]
+        endPoint = points[1]
+        print("startPoint: ", startPoint)
+        print("endPoint: ", endPoint)
+        dimensions = []
+
+        zip_object = zip(startPoint, endPoint)
+        for startPoint, endPoint in zip_object:
+            dimensions.append(abs(startPoint-endPoint))
+        
+        print("dimensions: ", dimensions)
+        print("dimensions[0]: ", dimensions[0])
+        cylLength = math.sqrt(dimensions[0]**2+dimensions[1]**2+dimensions[2]**2)
+
+
+        #startPoint:  [167.0, 122.0, 0.0]
+        #endPoint:  [-138.0, 122.0, 0.0]
+        base1 = Cylinder(1670, 1220, 0, 10, cylLength, [-1, 0, 0], "YELLOW", "Wood")
+        base1.initForNX()
+
+    
 
 
 
 ########testing123############
 testPlane = findBasePlane()
 basePlaneWithoutBorders = removeBorderLines(testPlane)
+buildWeldingLines(basePlaneWithoutBorders)
 print("Vi tar påskehelg")
