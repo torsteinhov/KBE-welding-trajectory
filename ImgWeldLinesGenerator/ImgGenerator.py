@@ -72,4 +72,4 @@ def runImgGenerator(filename):
     pixels = makeWeldLines(binaryMaze)
     convert2Img(pixels)
 
-runImgGenerator("ImgWeldLinesGenerator\\img_mazes\\maze_test2.png")
+runImgGenerator("ImgWeldLinesGenerator\\Img_mazes\\maze_test2.png")
