@@ -7,6 +7,12 @@ import json
 import math
 import random
 
+import numpy as np
+from PIL import Image
+from MazeConverter import convert2binary
+from WeldingProcessor import makeWeldLines
+from ImgGenerator import convert2Img
+
 import cgi
 
 HOST_NAME = '127.0.0.1' 
@@ -175,14 +181,20 @@ def stringSplit(paramContainer, param_line):
 
     return paramContainer
 
+def runImgGenerator(filename):
+
+    binarymaze = convert2binary(filename)
+    pixels = makeWeldLines(binaryMaze)
+    convert2Img(pixels)
+
 
 if __name__ == '__main__':
-
-	server_class = HTTPServer
-	httpd = server_class((HOST_NAME, PORT_NUMBER), MyHandler)
-	
-	try:
-		httpd.serve_forever()
-	except KeyboardInterrupt:
-		pass
-	httpd.server_close()
+    runImgGenerator('maze_test2.png')
+    server_class = HTTPServer
+    httpd = server_class((HOST_NAME, PORT_NUMBER), MyHandler)
+    
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    httpd.server_close()
