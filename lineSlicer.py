@@ -12,7 +12,7 @@ from shapes.Sphere import Sphere
 from partReading import loadPRTFile, getFaces
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_v2.prt"
+torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_v3.prt"
 path = torstein_path
 
 # find the face with most lines
