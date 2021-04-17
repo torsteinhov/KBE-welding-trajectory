@@ -3,6 +3,10 @@ from flask import render_template, request, redirect
 from datetime import datetime 
 import os
 from werkzeug.utils import secure_filename
+from ImgWeldLinesGenerator.ImgGenerator import runImgGenerator
+
+aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+yourLocation = aashild_path
 
 @app.template_filter("clean_date") #name of custom filter
 def clean_date(dt):
@@ -119,9 +123,10 @@ def imgOrder():
         return redirect(request.url)
     return render_template("public/imgOrder.html")
 
-app.config["IMAGE_UPLOADS"] = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\imgFromCustomer"
+app.config["IMAGE_UPLOADS"] = yourLocation + "\\imgFromCustomer"
+app.config["SAVED_WELDINGLINES_IMAGES"] = yourLocation + "\\app\static\img"
 app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF", "PRT"]
-app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 *1024 #ET LITE BILDE
+app.config["MAX_IMAGE_FILESIZE"] = 20000000#0.5 * 1024 *1024 #ET LITE BILDE
 
 def allowed_image(filename):
   if not "." in filename:
@@ -143,8 +148,9 @@ def allowed_image_filesize(filesize):
 
 @app.route("/imgResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
 def imgResult():
+    print("Inside imgResult")
     #if request.method == "POST":
-
+    print("request.files: ", request.files)
     if request.files:
 
         print(request.cookies)
@@ -166,12 +172,19 @@ def imgResult():
 
         else:
             filename = secure_filename(image.filename) # gi et nytt filnavn
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            img_path = image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            print("image path om maze form customer: ", img_path)
+            print("Image saved") 
+            # Here comes the call on the welding generator for images
+            if ""
+            runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+filename )
+            print("Image grenerator is done.")
 
         #image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
         print("Image saved") # to get some response
 
         return redirect(request.url)
+    
     return render_template("public/imgResult.html")
 
 @app.route("/prtResult", methods=["GET", "POST"])

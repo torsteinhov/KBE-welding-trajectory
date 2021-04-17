@@ -61,15 +61,15 @@ def makeWeldLines(binaryMaze):
     return binaryMaze
 
 #takes in the processed binaryMaze and with a function .fromarray() transforms back to .jpg format with finished welding lines
-def convert2Img(pixels):
+def convert2Img(pixels, saveName):
     
     img = Image.fromarray(pixels,mode='CMYK')
-    img = img.save("ImgWeldLinesGenerator\\finished_processed.jpg")
+    img = img.save(saveName)
 
-def runImgGenerator(filename):
+def runImgGenerator(filename, saveName):
 
     binaryMaze = convert2binary(filename)
     pixels = makeWeldLines(binaryMaze)
-    convert2Img(pixels)
+    convert2Img(pixels, saveName)
 
-runImgGenerator("ImgWeldLinesGenerator\\img_mazes\\maze_test2.png")
+#runImgGenerator("ImgWeldLinesGenerator\\img_mazes\\maze_test2.png")
