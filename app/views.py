@@ -1,6 +1,8 @@
 from app import app # treat it like a package
 from flask import render_template, request, redirect
 from datetime import datetime 
+import os
+from werkzeug.utils import secure_filename
 
 @app.template_filter("clean_date") #name of custom filter
 def clean_date(dt):
@@ -8,6 +10,8 @@ def clean_date(dt):
 
 @app.route("/")
 def index():
+
+    
     return render_template("public/index.html")
 
 @app.route("/jinja")
@@ -73,7 +77,145 @@ def sign_up():
 
     return render_template("public/sign_up.html")
 
+users = {
+    "mitsuhiko": {
+        "name": "Armin Ronacher",
+        "bio": "Creatof of the Flask framework",
+        "twitter_handle": "@mitsuhiko"
+    },
+    "gvanrossum": {
+        "name": "Guido Van Rossum",
+        "bio": "Creator of the Python programming language",
+        "twitter_handle": "@gvanrossum"
+    },
+    "elonmusk": {
+        "name": "Elon Musk",
+        "bio": "technology entrepreneur, investor, and engineer",
+        "twitter_handle": "@elonmusk"
+    }
+}
+
 @app.route("/profile/<username>")
 def profile(username):
-    print("username: ", username)
-    return render_template("public/profile.html")
+
+    user = None
+
+    if username in users:
+        user = users[username]
+
+    return render_template("public/profile.html", username=username, user=user)
+
+@app.route("/prtOrder",  methods=["GET", "POST"]) #prtOrder
+def prtOrder():
+    if request.method == "POST":
+        return redirect(request.url)
+    return render_template("public/prtOrder.html")
+
+@app.route("/imgOrder", methods=["GET", "POST"]) #imgOrder
+def imgOrder():
+
+    if request.method == "POST": 
+
+        return redirect(request.url)
+    return render_template("public/imgOrder.html")
+
+app.config["IMAGE_UPLOADS"] = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\imgFromCustomer"
+app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF", "PRT"]
+app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 *1024 #ET LITE BILDE
+
+def allowed_image(filename):
+  if not "." in filename:
+    return False
+
+  ext = filename.rsplit(".", 1)[1] # ser hva som skjer etter punktum
+  if ext.upper() in app.config["ALLOWED_IMAGE_EXTENTIONS"]:
+    return True
+  else:
+    return False
+
+def allowed_image_filesize(filesize):
+
+  if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+    return True
+  else:
+    return False
+
+
+@app.route("/imgResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
+def imgResult():
+    #if request.method == "POST":
+
+    if request.files:
+
+        print(request.cookies)
+        if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
+            print("File exeeded maximum size")
+            return redirect(request.url)
+
+        image = request.files["image"] #store the file in this variable
+        #print(image)
+
+        # sikkerhetssjekk:
+        if image.filename == "":
+            print("Image must have a filename")
+            return redirect(request.url)
+      
+        if not allowed_image(image.filename):
+            print("That image extention is not allowed")
+            return redirect(request.url) 
+
+        else:
+            filename = secure_filename(image.filename) # gi et nytt filnavn
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+
+        #image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+        print("Image saved") # to get some response
+
+        return redirect(request.url)
+    return render_template("public/imgResult.html")
+
+@app.route("/prtResult", methods=["GET", "POST"])
+def prtRessult():
+    if request.method == "POST": 
+
+        return redirect(request.url)
+    return render_template("public/prtResult.html")
+
+
+
+
+@app.route("/upload-image", methods = ["GET", "POST"])
+def upload_image():
+
+  if request.method == "POST":
+
+    if request.files:
+
+      print(request.cookies)
+      if not allowed_image_filesize(request.cookies): #sjekker filstørrelsen
+        print("File exeeded maximum size")
+        return redirect(request.url)
+
+      image = request.files["image"] #store the file in this variable
+      #print(image)
+
+      # sikkerhetssjekk:
+      if image.filename == "":
+        print("Image must have a filename")
+        return redirect(request.url)
+      
+      if not allowed_image(image.filename):
+        print("That image extention is not allowed")
+        return redirect(request.url) 
+
+      else:
+        filename = secure_filename(image.filename) # gi et nytt filnavn
+        image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+
+      #image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+      print("Image saved") # to get some response
+
+      return redirect(request.url)
+
+
+  return render_template("public/upload_image.html")

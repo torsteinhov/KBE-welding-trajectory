@@ -13,3 +13,7 @@ video6:
 
 Further development:
 - suggest which is the best way to weld: hvilken rekkefølge er best å sveise i . 
+
+kommet til video9
+
+prøver nå å sette opp for vårt system, prøver meg på stringparsing på navn og email i imgOrder
