@@ -1,6 +1,6 @@
 {% extends "public/templates/public_template.html"%}
 
-{% block title%} prt order {% endblock %}
+{% block title%} img order {% endblock %}
 
 {% block main %}
 <div class="container">
@@ -10,7 +10,7 @@
             <hr>
             <p>Some information about the limitations and expextations</p>
 
-            <form action="/imgResult" method="POST">
+            <form action="/imgResult" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label> Name </label>
                     <input class="form-control" type="text" name="name" >
