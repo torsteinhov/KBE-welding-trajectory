@@ -92,7 +92,7 @@ def upload_image():
 
   return render_template("public/upload_image.html")
   """
-
+"""
 liste = ["hei", "paa", "deg"]
 
 for i, ordet in enumerate(liste):
@@ -104,6 +104,7 @@ strpoint = strpoint.split(",")
 for i in strpoint:
   i
 print("strpoint: ", strpoint)
+"""
 
 """
 #this is not working
@@ -145,3 +146,6 @@ def removeBorderLine(basePlane):
     
     return basePlaneCopy #the base plane without borders
 """
+savename = "hei"
+imgOnWeb = "<img src=\"{{ url_for('static', filename='img/"+ savename +"') }}\" alt=\"\">"
+print(imgOnWeb)

@@ -2,8 +2,11 @@ from app import app # treat it like a package
 from flask import render_template, request, redirect
 from datetime import datetime 
 import os
+import os.path
+from os import path
 from werkzeug.utils import secure_filename
 from ImgWeldLinesGenerator.ImgGenerator import runImgGenerator
+from PIL import Image
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
 yourLocation = aashild_path
@@ -125,7 +128,8 @@ def imgOrder():
 
 app.config["IMAGE_UPLOADS"] = yourLocation + "\\imgFromCustomer"
 app.config["SAVED_WELDINGLINES_IMAGES"] = yourLocation + "\\app\static\img"
-app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF", "PRT"]
+app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF"]
+app.config["ALLOWED_CAD_EXTENTIONS"] = ["PRT"]
 app.config["MAX_IMAGE_FILESIZE"] = 20000000#0.5 * 1024 *1024 #ET LITE BILDE
 
 def allowed_image(filename):
@@ -145,12 +149,22 @@ def allowed_image_filesize(filesize):
   else:
     return False
 
+def saveFileNewName(oldName, newName): #save the file again with correct name
+    img= Image.open(oldName)
+    img = img.save(newName)
+
+def updatLogFile(): #logfile for the system
+    #ta inn navn og sånn
+    #lagre til fila
+    #lagre dato
 
 @app.route("/imgResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
 def imgResult():
     print("Inside imgResult")
     #if request.method == "POST":
     print("request.files: ", request.files)
+    
+    
     if request.files:
 
         print(request.cookies)
@@ -172,16 +186,22 @@ def imgResult():
 
         else:
             filename = secure_filename(image.filename) # gi et nytt filnavn
-            img_path = image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
-            print("image path om maze form customer: ", img_path)
-            print("Image saved") 
-            # Here comes the call on the welding generator for images
-            if ""
-            runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+filename )
-            print("Image grenerator is done.")
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            print("Image from customer saved.") 
 
-        #image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-        print("Image saved") # to get some response
+            # Here comes the call on the welding generator for images
+            if not ".jpg" in filename:
+                savename = filename.split(".")[0]
+                savename= savename+".jpg"
+            if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
+                print("Denne filen finnes")
+                os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
+
+            runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg" )
+            print("Image grenerator is done.")
+            saveFileNewName(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg", app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+savename)
+            
+        
 
         return redirect(request.url)
     

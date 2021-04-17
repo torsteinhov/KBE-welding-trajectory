@@ -17,3 +17,12 @@ Further development:
 kommet til video9
 
 prøver nå å sette opp for vårt system, prøver meg på stringparsing på navn og email i imgOrder
+
+
+<img src="{{ url_for('static', filename='img/result.jpg') }}" alt="">
+
+app\static\img\result.jpg
+
+Nå lastes bilde inn
+
+Neste Få til log fil og prt-fil
