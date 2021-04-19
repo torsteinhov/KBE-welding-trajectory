@@ -8,8 +8,9 @@ from werkzeug.utils import secure_filename
 from ImgWeldLinesGenerator.ImgGenerator import runImgGenerator
 from PIL import Image
 
+torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
-yourLocation = aashild_path
+yourLocation = torstein_path
 
 @app.template_filter("clean_date") #name of custom filter
 def clean_date(dt):
@@ -157,16 +158,15 @@ def updatLogFile(): #logfile for the system
     #ta inn navn og sånn
     #lagre til fila
     #lagre dato
-
+    ...
 @app.route("/imgResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
 def imgResult():
     print("Inside imgResult")
     #if request.method == "POST":
     print("request.files: ", request.files)
-    
-    
-    if request.files:
 
+
+    if request.files:
         print(request.cookies)
         if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
             print("File exeeded maximum size")
