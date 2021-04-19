@@ -10,7 +10,7 @@ from PIL import Image
 
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
-yourLocation = torstein_path
+yourLocation = aashild_path
 
 @app.template_filter("clean_date") #name of custom filter
 def clean_date(dt):
@@ -129,7 +129,8 @@ def imgOrder():
 
 app.config["IMAGE_UPLOADS"] = yourLocation + "\\imgFromCustomer"
 app.config["SAVED_WELDINGLINES_IMAGES"] = yourLocation + "\\app\static\img"
-app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF"]
+app.config["PRT_FILES_UPLOAD"] = yourLocation + "\\prt"
+app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF", "PRT"]
 app.config["ALLOWED_CAD_EXTENTIONS"] = ["PRT"]
 app.config["MAX_IMAGE_FILESIZE"] = 20000000#0.5 * 1024 *1024 #ET LITE BILDE
 
@@ -139,6 +140,16 @@ def allowed_image(filename):
 
   ext = filename.rsplit(".", 1)[1] # ser hva som skjer etter punktum
   if ext.upper() in app.config["ALLOWED_IMAGE_EXTENTIONS"]:
+    return True
+  else:
+    return False
+
+def allowed_cad(filename):
+  if not "." in filename:
+    return False
+
+  ext = filename.rsplit(".", 1)[1] # ser hva som skjer etter punktum
+  if ext.upper() in app.config["ALLOWED_CAD_EXTENTIONS"]:
     return True
   else:
     return False
@@ -165,7 +176,6 @@ def imgResult():
     #if request.method == "POST":
     print("request.files: ", request.files)
 
-
     if request.files:
         print(request.cookies)
         if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
@@ -180,7 +190,7 @@ def imgResult():
             print("Image must have a filename")
             return redirect(request.url)
       
-        if not allowed_image(image.filename):
+        if not allowed_cad(image.filename):
             print("That image extention is not allowed")
             return redirect(request.url) 
 
@@ -200,8 +210,6 @@ def imgResult():
             runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg" )
             print("Image grenerator is done.")
             saveFileNewName(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg", app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+savename)
-            
-        
 
         return redirect(request.url)
     
@@ -209,9 +217,51 @@ def imgResult():
 
 @app.route("/prtResult", methods=["GET", "POST"])
 def prtRessult():
-    if request.method == "POST": 
+    print("Inside prtResult")
+    #if request.method == "POST":
+    print("request.files: ", request.files)
+
+    """
+    if request.method == "POST":
+        #getting the name, email, company from the order
+        req = request.form
+        print("req: ", req)
+
+        name =req["name"]
+        email = req["email"]
+        company = req["Company"]
+
+        print(name, email, company)
+        details = name.replace(" ", "_") + company.replace(" ", "_")
+    """
+    if request.files:
+        print(request.cookies)
+        if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
+            print("File exeeded maximum size")
+            return redirect(request.url)
+
+        image = request.files["image"] #store the file in this variable
+        #print(image)
+
+        # sikkerhetssjekk:
+        if image.filename == "":
+            print("Image must have a filename")
+            return redirect(request.url)
+    
+        if not allowed_image(image.filename):
+            print("That image extention is not allowed")
+            return redirect(request.url) 
+
+        else:
+            filename = secure_filename(image.filename) # gi et nytt filnavn
+            #filename = details + filename
+            print(filename) 
+            image.save(os.path.join(app.config["PRT_FILES_UPLOAD"], filename))
+            
+            print("prt file from customer saved.")        
 
         return redirect(request.url)
+    
     return render_template("public/prtResult.html")
 
 
