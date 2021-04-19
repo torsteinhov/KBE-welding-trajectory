@@ -181,6 +181,8 @@ def imgResult():
     #    os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
 
     if request.files:
+        
+
         print(request.cookies)
         if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
             print("File exeeded maximum size")
@@ -201,6 +203,9 @@ def imgResult():
         else:
             filename = secure_filename(image.filename) # gi et nytt filnavn
 
+            if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
+                print("Denne filen finnes")
+                os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
             
 
             if filename.split(".")[1] == "prt":
@@ -214,6 +219,9 @@ def imgResult():
                 if not ".jpg" in filename:
                     savename = filename.split(".")[0]
                     savename= savename+".jpg"
+                else:
+                    savename=filename
+
                 if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
                     print("Denne filen finnes")
                     os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
