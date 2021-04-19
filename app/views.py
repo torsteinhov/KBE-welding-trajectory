@@ -7,6 +7,8 @@ from os import path
 from werkzeug.utils import secure_filename
 from ImgWeldLinesGenerator.ImgGenerator import runImgGenerator
 from PIL import Image
+from datetime import date
+
 
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
@@ -165,10 +167,15 @@ def saveFileNewName(oldName, newName): #save the file again with correct name
     img= Image.open(oldName)
     img = img.save(newName)
 
-def updatLogFile(): #logfile for the system
+def updatLogFile(name,email,company,infile,outfile): #logfile for the system
     #ta inn navn og sånn
     #lagre til fila
     #lagre dato
+    
+    now = datetime.now()
+    logLine = now + ", " + name + ", " + email +", "+ company + ", " + infile +", "+outfile + "."
+    if path.exists(yourLocation + "\\LogOrder.txt"):
+
     ...
 @app.route("/imgResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
 def imgResult():
@@ -176,13 +183,9 @@ def imgResult():
     #if request.method == "POST":
     print("request.files: ", request.files)
 
-    #if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
-    #    print("Denne filen finnes")
-    #    os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
 
     if request.files:
         
-
         print(request.cookies)
         if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
             print("File exeeded maximum size")
@@ -234,6 +237,7 @@ def imgResult():
     
     return render_template("public/imgResult.html")
 
+"""
 @app.route("/prtResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
 def prtResult():
     print("Inside imgResult")
@@ -267,7 +271,7 @@ def prtResult():
         return redirect(request.url)
     
     return render_template("public/prtResult.html")
-
+"""
 """
 @app.route("/prtResult", methods=["GET", "POST"])
 def prtRessult():

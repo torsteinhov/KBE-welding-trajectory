@@ -1,4 +1,5 @@
 import numpy as np
+from datetime import datetime
 ''' #Test av å legge til enere rundt en matrise
 matrise = np.array([[1,2,3],
                     [1,2,3],
@@ -146,6 +147,10 @@ def removeBorderLine(basePlane):
     
     return basePlaneCopy #the base plane without borders
 """
+"""
 savename = "hei"
 imgOnWeb = "<img src=\"{{ url_for('static', filename='img/"+ savename +"') }}\" alt=\"\">"
 print(imgOnWeb)
+"""
+now = datetime.now()
+print("now: ", now)
