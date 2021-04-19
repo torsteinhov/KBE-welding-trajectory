@@ -132,7 +132,7 @@ app.config["SAVED_WELDINGLINES_IMAGES"] = yourLocation + "\\app\static\img"
 app.config["PRT_FILES_UPLOAD"] = yourLocation + "\\prt"
 app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF", "PRT"]
 app.config["ALLOWED_CAD_EXTENTIONS"] = ["PRT"]
-app.config["MAX_IMAGE_FILESIZE"] = 20000000#0.5 * 1024 *1024 #ET LITE BILDE
+app.config["MAX_IMAGE_FILESIZE"] = 20000000
 
 def allowed_image(filename):
   if not "." in filename:
@@ -176,6 +176,10 @@ def imgResult():
     #if request.method == "POST":
     print("request.files: ", request.files)
 
+    #if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
+    #    print("Denne filen finnes")
+    #    os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
+
     if request.files:
         print(request.cookies)
         if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
@@ -183,6 +187,58 @@ def imgResult():
             return redirect(request.url)
 
         image = request.files["image"] #store the file in this variable
+        #print(image)
+
+        # sikkerhetssjekk:
+        if image.filename == "":
+            print("Image must have a filename")
+            return redirect(request.url)
+      
+        if not allowed_image(image.filename):
+            print("That image extention is not allowed")
+            return redirect(request.url) 
+
+        else:
+            filename = secure_filename(image.filename) # gi et nytt filnavn
+
+            
+
+            if filename.split(".")[1] == "prt":
+                image.save(os.path.join(app.config["PRT_FILES_UPLOAD"], filename))
+                print("PRT-file from customer saved.")
+            else:
+                image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                print("Image from customer saved.") 
+
+                # Here comes the call on the welding generator for images
+                if not ".jpg" in filename:
+                    savename = filename.split(".")[0]
+                    savename= savename+".jpg"
+                if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
+                    print("Denne filen finnes")
+                    os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
+
+                runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg" )
+                print("Image grenerator is done.")
+                saveFileNewName(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg", app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+savename)
+
+        return redirect(request.url)
+    
+    return render_template("public/imgResult.html")
+
+@app.route("/prtResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
+def prtResult():
+    print("Inside imgResult")
+    #if request.method == "POST":
+    print("request.files: ", request.files)
+
+    if request.files:
+        print(request.cookies)
+        if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
+            print("File exeeded maximum size")
+            return redirect(request.url)
+
+        image = request.files["prt"] #store the file in this variable
         #print(image)
 
         # sikkerhetssjekk:
@@ -199,29 +255,19 @@ def imgResult():
             image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
             print("Image from customer saved.") 
 
-            # Here comes the call on the welding generator for images
-            if not ".jpg" in filename:
-                savename = filename.split(".")[0]
-                savename= savename+".jpg"
-            if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
-                print("Denne filen finnes")
-                os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
-
-            runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg" )
-            print("Image grenerator is done.")
-            saveFileNewName(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg", app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+savename)
 
         return redirect(request.url)
     
-    return render_template("public/imgResult.html")
+    return render_template("public/prtResult.html")
 
+"""
 @app.route("/prtResult", methods=["GET", "POST"])
 def prtRessult():
     print("Inside prtResult")
     #if request.method == "POST":
     print("request.files: ", request.files)
 
-    """
+    
     if request.method == "POST":
         #getting the name, email, company from the order
         req = request.form
@@ -233,7 +279,7 @@ def prtRessult():
 
         print(name, email, company)
         details = name.replace(" ", "_") + company.replace(" ", "_")
-    """
+    
     if request.files:
         print(request.cookies)
         if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
@@ -263,42 +309,4 @@ def prtRessult():
         return redirect(request.url)
     
     return render_template("public/prtResult.html")
-
-
-
-
-@app.route("/upload-image", methods = ["GET", "POST"])
-def upload_image():
-
-  if request.method == "POST":
-
-    if request.files:
-
-      print(request.cookies)
-      if not allowed_image_filesize(request.cookies): #sjekker filstørrelsen
-        print("File exeeded maximum size")
-        return redirect(request.url)
-
-      image = request.files["image"] #store the file in this variable
-      #print(image)
-
-      # sikkerhetssjekk:
-      if image.filename == "":
-        print("Image must have a filename")
-        return redirect(request.url)
-      
-      if not allowed_image(image.filename):
-        print("That image extention is not allowed")
-        return redirect(request.url) 
-
-      else:
-        filename = secure_filename(image.filename) # gi et nytt filnavn
-        image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
-
-      #image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-      print("Image saved") # to get some response
-
-      return redirect(request.url)
-
-
-  return render_template("public/upload_image.html")
+"""

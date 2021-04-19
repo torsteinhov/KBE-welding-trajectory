@@ -29,8 +29,8 @@
                 <div class= "form-group">
                     <label>Select prt-files</label>
                     <div class = "custom-file">
-                        <input oninput="filesize(this);" type = "file" class = "custom-file-input" name="image" id="image">
-                        <label class = "custom-file-lable" for="image">Select prt-file...</label>
+                        <input oninput="filesize(this);" type = "file" class = "custom-file-input" name="prt" id="prt">
+                        <label class = "custom-file-lable" for="prt">Select prt-file...</label>
                     </div>
                 </div>
 
@@ -39,5 +39,15 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+{% block script %}
+
+<script>
+
+function filesize(elem){
+    document.cookie = `filesize=${elem.files[0].size}`
+  }
+</script>
 
 {% endblock %}
