@@ -5,6 +5,7 @@ import NXOpen.Features
 import NXOpen.GeometricUtilities
 import NXOpen.Preferences
 import math
+from datetime import datetime 
 
 from shapes.Cylinder import Cylinder
 from shapes.Sphere import Sphere
@@ -14,16 +15,16 @@ from lineSlicer import buildWeldingLines, removeBorderLines, findPoints, findBas
 
 from app.views import updatLogFile
 
-aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_v4.prt"
+aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
 path = torstein_path
 
 #testPlane = findBasePlane()
 #basePlaneWithoutBorders = removeBorderLines(testPlane)
 #buildWeldingLines(basePlaneWithoutBorders)
 #print("Vi tar påskehelg")
-read logfile
-loop for running  through new files
+#read logfile
+#loop for running  through new files
 
 def saveGeneratedCADFile(path, filename):
     theSession  = NXOpen.Session.GetSession()
@@ -42,27 +43,36 @@ def readlogFile():
     f.open(logfilePath, "r")
     linesToBeGenerated = []
     for line in f:
-        if (".prt") in line and ("None" in file):
+        if (".prt") in line and ("None" in line):
             lineList = line.split(", ")
             linesToBeGenerated.append(lineList)
+    f.close()
     
     return linesToBeGenerated
 
+def updateLogFile(order):
+    nowObj = datetime.now()
+    nowStr = nowObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+    ...
+
+
 def main():
-    linesToBeGenerated = readlogFile():
+    linesToBeGenerated = readlogFile()
 
     for order in len(linesToBeGenerated):
 
         infile = linesToBeGenerated[order][-2]
         pathInFile = yourLocation + "\\prt\\"+ infile
         pathOutFile = yourLocation + "\\prtGenerated\\"
-        outfile = infile.split(".")[]+"_generated.prt"
+        outfile = infile.split(".")[0]+"_generated.prt"
 
-        testPlane = findBasePlane() #BØR HA PATH SOM INPUT PARAMETER?
+        testPlane = findBasePlane(pathInFile) #BØR HA PATH SOM INPUT PARAMETER?
         basePlaneWithoutBorders = removeBorderLines(testPlane)
         buildWeldingLines(basePlaneWithoutBorders)
         
-        saveGeneratedCADFile(pathOutFile, outfile)
-
+        saveGeneratedCADFile(pathOutFile, outfile) 
+        #satser på at det går bra med flere filer
+        order[-1] = outfile
+        updateLogFile(order)
         print("Vi tar påskehelg")
         
