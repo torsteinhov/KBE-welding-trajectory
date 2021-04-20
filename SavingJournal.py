@@ -11,7 +11,7 @@ def main() :
     # ----------------------------------------------
     #   Menu: File->Save As...
     # ----------------------------------------------
-    partSaveStatus1 = workPart.SaveAs("C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\maze_test_3D_JournalSaving")
+    partSaveStatus1 = workPart.SaveAs("C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\testSave")
     
     partSaveStatus1.Dispose()
     # ----------------------------------------------
@@ -21,6 +21,7 @@ def main() :
 if __name__ == '__main__':
     main()
 
+"""
 def saveGeneratedCADFile(path, filename):
     theSession  = NXOpen.Session.GetSession()
     workPart = theSession.Parts.Work
@@ -29,3 +30,4 @@ def saveGeneratedCADFile(path, filename):
     partSaveStatus1 = workPart.SaveAs(path+filename)
     
     partSaveStatus1.Dispose()
+"""
