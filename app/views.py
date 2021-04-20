@@ -172,11 +172,20 @@ def updatLogFile(name,email,company,infile,outfile): #logfile for the system
     #lagre til fila
     #lagre dato
     
-    now = datetime.now()
-    logLine = now + ", " + name + ", " + email +", "+ company + ", " + infile +", "+outfile + "."
-    if path.exists(yourLocation + "\\LogOrder.txt"):
+    nowObj = datetime.now()
+    nowStr = nowObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+    print("Type: ", type(nowStr))
 
-    ...
+    logLine = str(nowStr) + ", " + name + ", " + email +", "+ company + ", " + infile +", "+outfile + ".\n"
+    logfilePath = yourLocation + "\\LogOrder.txt" 
+    if path.exists(logfilePath):
+        f = open(logfilePath, "a")
+    else:
+        f = open(logfilePath, "w")
+    
+    f.write(logLine)
+    f.close()
+    
 @app.route("/imgResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
 def imgResult():
     print("Inside imgResult")
@@ -206,32 +215,44 @@ def imgResult():
         else:
             filename = secure_filename(image.filename) # gi et nytt filnavn
 
-            if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
+            name =request.form["name"]
+            email = request.form["email"]
+            company = request.form["Company"]
+
+            print(name, email, company)
+            details = name.replace(" ", "_") + company.replace(" ", "_")
+
+            if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"): # this is suppose to dele the result file. 
                 print("Denne filen finnes")
                 os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
             
 
             if filename.split(".")[1] == "prt":
-                image.save(os.path.join(app.config["PRT_FILES_UPLOAD"], filename))
+                image.save(os.path.join(app.config["PRT_FILES_UPLOAD"], details+filename))
                 print("PRT-file from customer saved.")
+                updatLogFile(name,email, company,details+filename,"None")
+
+                return render_template("public/prtResult.html")
             else:
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
                 print("Image from customer saved.") 
 
-                # Here comes the call on the welding generator for images
-                if not ".jpg" in filename:
+                
+                if not ".jpg" in filename: #convert the file to jpg
                     savename = filename.split(".")[0]
                     savename= savename+".jpg"
                 else:
                     savename=filename
 
-                if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"):
+                if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"): # delets the result file if it exists
                     print("Denne filen finnes")
                     os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
 
-                runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg" )
+                # Here comes the call on the welding generator for images
+                runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg" ) # saving the generated image as "result.jpg"
                 print("Image grenerator is done.")
                 saveFileNewName(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg", app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+savename)
+                updatLogFile(name,email,company,filename,savename)
 
         return redirect(request.url)
     

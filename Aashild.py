@@ -152,5 +152,6 @@ savename = "hei"
 imgOnWeb = "<img src=\"{{ url_for('static', filename='img/"+ savename +"') }}\" alt=\"\">"
 print(imgOnWeb)
 """
-now = datetime.now()
-print("now: ", now)
+nowObj = datetime.now()
+nowStr = nowObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+print("Type: ", type(nowStr))

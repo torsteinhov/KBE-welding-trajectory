@@ -161,7 +161,7 @@ def buildWeldingLines(weldinglines):
 
 
 ########testing123############
-testPlane = findBasePlane()
-basePlaneWithoutBorders = removeBorderLines(testPlane)
-buildWeldingLines(basePlaneWithoutBorders)
-print("Vi tar påskehelg")
+#testPlane = findBasePlane()
+#basePlaneWithoutBorders = removeBorderLines(testPlane)
+#buildWeldingLines(basePlaneWithoutBorders)
+#print("Vi tar påskehelg")
