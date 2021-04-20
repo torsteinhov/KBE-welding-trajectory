@@ -11,12 +11,12 @@ from shapes.Sphere import Sphere
 
 from partReading import loadPRTFile, getFaces
 
-aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_v4.prt"
-path = torstein_path
+#aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
+#torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_v4.prt"
+#path = torstein_path
 
 # find the face with most lines
-def findBasePlane():
+def findBasePlane(path):
     theSession = loadPRTFile(path)
     objects = getFaces(theSession)
     aPoint= objects[0][0][0][0][0]
