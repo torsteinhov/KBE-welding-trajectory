@@ -50,13 +50,19 @@ def readlogFile():
     
     return linesToBeGenerated
 
-def updateLogFile(order):
+def updateLogFile(order, newLogLine):
     nowObj = datetime.now()
     nowStr = nowObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
-    ...
+
+    newLineInFile = nowStr
+    for i in range(len(1,order)):
+        newLineInFile += order[i]
+    
+    
 
 
 def main():
+    global yourLocation
     linesToBeGenerated = readlogFile()
 
     for order in len(linesToBeGenerated):
@@ -72,7 +78,8 @@ def main():
         
         saveGeneratedCADFile(pathOutFile, outfile) 
         #satser på at det går bra med flere filer
-        order[-1] = outfile
-        updateLogFile(order)
+        newLogLine = order 
+        newLogLine[-1] = outfile
+        updateLogFile(order, newLogLine)
         print("Vi tar påskehelg")
         
