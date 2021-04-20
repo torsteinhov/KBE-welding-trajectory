@@ -116,19 +116,6 @@ def removeBorderLines(basePlane):
     print("weldingLines", basePlaneCopy)
     return basePlaneCopy #weldinglines
 
-'''
-[[<NXOpen.Point3d object at 0x000001B97631F6C0>, <NXOpen.Point3d object at 0x000001B97631F750>], 
-[<NXOpen.Point3d object at 0x000001B97631F720>, <NXOpen.Point3d object at 0x000001B97631F7B0>], 
-[<NXOpen.Point3d object at 0x000001B97631F780>, <NXOpen.Point3d object at 0x000001B97631F810>], 
-[<NXOpen.Point3d object at 0x000001B97631F7E0>, <NXOpen.Point3d object at 0x000001B97631F870>], 
-[<NXOpen.Point3d object at 0x000001B97631F840>, <NXOpen.Point3d object at 0x000001B97631F8D0>], 
-[<NXOpen.Point3d object at 0x000001B97631F8A0>, <NXOpen.Point3d object at 0x000001B97631F930>], 
-[<NXOpen.Point3d object at 0x000001B97631F900>, <NXOpen.Point3d object at 0x000001B97631F990>], 
-[<NXOpen.Point3d object at 0x000001B97631F960>, <NXOpen.Point3d object at 0x000001B97631F9F0>], 
-[<NXOpen.Point3d object at 0x000001B97631F9C0>, <NXOpen.Point3d object at 0x000001B97631FA50>], 
-[<NXOpen.Point3d object at 0x000001B97631FA20>, <NXOpen.Point3d object at 0x000001B97631FAB0>]]
-
-'''
 def buildWeldingLines(weldinglines):
     for line in weldinglines:
         points = findPoints(line)
