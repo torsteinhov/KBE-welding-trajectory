@@ -40,7 +40,7 @@ def readlogFile():
     if not path.exists(logfilePath):
         print("Error, logfile for production does not exist.")
         return
-    f.open(logfilePath, "r")
+    f=open(logfilePath, "r")
     linesToBeGenerated = []
     for line in f:
         if (".prt") in line and ("None" in line):
