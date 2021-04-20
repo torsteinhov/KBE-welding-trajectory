@@ -6,9 +6,9 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>Order weldinglines</h1>
+            <h1>Generator</h1>
             <hr>
-            <p>Some information about the limitations and expextations</p>
+            <p>Please provide your personal information and desired format. We accept ".prt" files for the CAD version of the generator, and ".jpg" aswell as ".png" for the Image generator.</p>
 
             <form action="/imgResult" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
@@ -28,12 +28,13 @@
 
                 <div class= "form-group">
                     <label>Select File</label>
+                    <p></p>
                     <div class = "custom-file">
                         <input oninput="filesize(this);" type = "file" class = "custom-file-input" name="image" id="image">
                         <label class = "custom-file-lable" for="image">Select file...</label>
                     </div>
                 </div>
-
+                <p></p>
                 <button type="submit" class="btn btn-primary">Order now</button>
         </div>
     </div>
