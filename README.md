@@ -68,4 +68,19 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 | name | what it does |
 | name | what it does |
 
+<h2>How to run:</h2>
 
++ Run run.py
++ Interact with webpage, upload file in Generator
++ **CAD**:
+  + Run Journal in Developer
++ **Image**:
+  + Your image is processed and presented to you
+
+<h2>Improvements from last project</h2>
+
++ 
+
+<h2>Further development</h2>
+
++ 
