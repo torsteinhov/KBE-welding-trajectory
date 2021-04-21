@@ -18,7 +18,7 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 
 <h2>Architecture</h2>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/77832956/114302401-28e2fa80-9ac9-11eb-9b13-1052ff9ad147.png">
+<img src="https://user-images.githubusercontent.com/77832956/115551909-f943a780-a2ab-11eb-8b2a-ec8bb10f177b.png">
 </p>
 
 <h2>Program files with corresponding methods</h2>
