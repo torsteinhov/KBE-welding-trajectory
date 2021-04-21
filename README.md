@@ -20,3 +20,52 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 <p align="center">
 <img src="https://user-images.githubusercontent.com/77832956/114302401-28e2fa80-9ac9-11eb-9b13-1052ff9ad147.png">
 </p>
+
+<h2>Program files with corresponding methods</h2>
+<br>
+<h3>FILE.py</h3>
+
+**TEXT**
+
+| Method | Functionality |
+| --- | --- |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+
+<h3>FILE.py</h3>
+
+**TEXT**
+
+| Method | Functionality |
+| --- | --- |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+
+<h3>FILE.py</h3>
+
+**TEXT**
+
+| Method | Functionality |
+| --- | --- |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+
+
+<h3>FILE.py</h3>
+
+**TEXT**
+
+| Method | Functionality |
+| --- | --- |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+| name | what it does |
+
+
