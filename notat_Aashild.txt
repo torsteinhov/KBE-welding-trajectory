@@ -26,3 +26,8 @@ app\static\img\result.jpg
 Nå lastes bilde inn
 
 Neste Få til log fil og prt-fil
+
+21-Apr-2021 (18:11:02.089234), Anna Akselsen, anna@akselsen.no, Akselsen AS, Anna_AkselsenAkselsen_ASmaze_test_3D.prt, None.
+21-Apr-2021 (18:11:40.349801), Bernt Knutsen, bernt@knutsen.no, Knutsen AS, Bernt_KnutsenKnutsen_ASmaze_v2.prt, None.
+21-Apr-2021 (18:12:17.974988), Cecilie Hoyer, cecilie@hoyer.no, Hoyer AS, Cecilie_HoyerHoyer_ASmaze_v3.prt, None.
+21-Apr-2021 (18:12:42.514783), Daniel Skog, daniel@skog.no, Skog AS, Daniel_SkogSkog_ASmaze_v4.prt, None.

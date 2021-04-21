@@ -5,6 +5,7 @@ from datetime import datetime
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
 yourLocation = aashild_path
 
+
 def readlogFile():
     logfilePath = yourLocation + "\\LogOrder.txt" 
     if not path.exists(logfilePath):
@@ -24,36 +25,40 @@ def readlogFile():
 test = readlogFile()
 print(test)
 
-order = ['20-Apr-2021 (08:03:25.532371)', 'Mats PER', 'mats@PER.no', 'PER AS', 'Mats_PERPER_ASnr2.prt', 'None.\n']
+#order = ['20-Apr-2021 (08:03:25.532371)', 'Mats PER', 'mats@PER.no', 'PER AS', 'Mats_PERPER_ASnr2.prt', 'None.\n']
+order = ['21-Apr-2021 (17:10:12.217403), Mats PER', 'mats@PER.no', 'PER AS', 'Mats_PERPER_ASnr2.prt', 'None.\n']
+         #21-Apr-2021 (17:10:12.217403), Mats PER, mats@PER.no, PER AS, Mats_PERPER_ASnr2.prt, None.
+
 newLogLine = ['20-Apr-2021 (08:03:25.532371)', 'Mats PER', 'mats@PER.no', 'PER AS', 'Mats_PERPER_ASnr2.prt', 'Mats_PERPER_ASnr2_generated.prt']
 
 def updateLogFile(order, newLogLine):
     nowObj = datetime.now()
     nowStr = nowObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
 
-    newLineInFile = "\n"+ nowStr + ", "
+    newLineInFile = nowStr + ", "
     oldLineInFile = ""
     for i in range(len(order)):
         if i == len(order)-1:
-            oldLineInFile+=order[i] + "."
+            oldLineInFile+=order[i].strip("\n")
         else:
             oldLineInFile+=order[i] + ", "
     for i in range(1,len(newLogLine)):
         if i == len(newLogLine)-1:
-            newLineInFile += newLogLine[i]+"."
+            newLineInFile += newLogLine[i] + "."
         else:
             newLineInFile += newLogLine[i] + ", "
 
     logfilePath = yourLocation + "\\LogOrder.txt" 
-    f = open(logfilePath, "r") 
-    lines = f.readlines()
-    f.close()
-    g = open(logfilePath, "w")
+    f = open(logfilePath, "r") # opening the file
+    lines = f.readlines() # stores the content in a list
+    f.close() #close the file
+
+    g = open(logfilePath, "w") # opening the file with writing premissions
     print("old line: ", oldLineInFile)
     print("new line: ", newLineInFile)
     for line in lines:
 
-        if oldLineInFile != line: # NOT WORKING
+        if line.strip("\n") != oldLineInFile:#"21-Apr-2021 (17:10:12.217403), Mats PER, mats@PER.no, PER AS, Mats_PERPER_ASnr2.prt, None.": # NOT WORKING
             print("ikke det vi vil slette: ", line)
             g.write(line)
     
@@ -63,6 +68,7 @@ def updateLogFile(order, newLogLine):
     f.close
 
 updateLogFile(order, newLogLine)
+
 
 """
 testList = ["hei", "hallo"]
@@ -88,3 +94,19 @@ wantToRemove ="20-Apr-2021 (08:03:25.532371), Mats PER, mats@PER.no, PER AS, Mat
 
 if oldLine == wantToRemove:
     print("DE ER LIKE")
+"""
+a_file = open("sample.txt", "r")
+
+
+lines = a_file.readlines()
+a_file.close()
+
+new_file = open("sample.txt", "w")
+for line in lines:
+    if line.strip("\n") != "hvordan har du det?":
+#Delete "line2" from new_file
+
+        new_file.write(line)
+
+new_file.close()
+"""

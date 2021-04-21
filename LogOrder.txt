@@ -1,4 +1,1 @@
 2021-04-20 07:44:11.325586, Aashild Kolstad, aashild@ntnu.no, NTNU company, maze_test3.jpg, maze_test3.jpg.
-20-Apr-2021 (15:35:02.676853), Heidi Hanssen, Heid@hanssen.no, Hanssen, Heidi_HanssenHanssennr2.prt, None.
-
-20-Apr-2021 (15:58:12.689020), Heidi Hanssen, Heid@hanssen.no, Hanssen, Heidi_HanssenHanssennr2.prt, Heidi_HanssenHanssennr2_generated.
