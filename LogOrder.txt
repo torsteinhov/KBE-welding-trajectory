@@ -1,1 +1,8 @@
 2021-04-20 07:44:11.325586, Aashild Kolstad, aashild@ntnu.no, NTNU company, maze_test3.jpg, maze_test3.jpg.
+22-Apr-2021 (08:47:02.787121), Paal, sisteAskeladd@hotmail.com, sisteEventyrerenAS, maze_test3.jpg, maze_test3.jpg.
+22-Apr-2021 (08:49:04.034467), Olaug Wiltersen, ow@yahoo.com, fineFr�kner, maze_test2.png, maze_test2.jpg.
+22-apr-2021 (08:51:42.659203), Espen Askeladd, espenask@gmail.com, EventyrAS, Espen_AskeladdEventyrASmaze_v4.prt, Espen_AskeladdEventyrASmaze_v4_generated.prt.
+22-apr-2021 (08:51:51.304094), Per, askeladd@gmail.com, TrolletAS, PerTrolletASmaze_v3.prt, PerTrolletASmaze_v3_generated.prt.
+22-apr-2021 (08:59:56.979360), Tormod Skadsem, tormodskadsem@gmail.com, skadsemAS, Tormod_SkadsemskadsemASmaze_v2.prt, Tormod_SkadsemskadsemASmaze_v2_generated.prt.
+22-apr-2021 (09:03:53.542487), egil helgesen, egilhelgesen@gmail.com, helgesenAS, egil_helgesenhelgesenASmaze_v3.prt, egil_helgesenhelgesenASmaze_v3_generated.prt.
+22-apr-2021 (09:07:15.716051), tor, torgull@hotmail.com, gullaksenAS, torgullaksenASmaze_v4.prt, torgullaksenASmaze_v4_generated.prt.

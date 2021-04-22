@@ -20,7 +20,7 @@ from lineSlicer import buildWeldingLines, removeBorderLines, findPoints, findBas
 
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
-yourLocation = aashild_path
+yourLocation = torstein_path
 
 #testPlane = findBasePlane()
 #basePlaneWithoutBorders = removeBorderLines(testPlane)
