@@ -12,6 +12,7 @@ from datetime import date
 
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+#andrei_path = <YOUR_PATH_HERE>
 yourLocation = torstein_path
 
 @app.template_filter("clean_date") #name of custom filter
@@ -165,88 +166,3 @@ def imgResult():
     
     return render_template("public/imgResult.html")
 
-"""
-@app.route("/prtResult", methods=["GET", "POST"]) #the feedback after ordering imge-welding lines
-def prtResult():
-    print("Inside imgResult")
-    #if request.method == "POST":
-    print("request.files: ", request.files)
-
-    if request.files:
-        print(request.cookies)
-        if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
-            print("File exeeded maximum size")
-            return redirect(request.url)
-
-        image = request.files["prt"] #store the file in this variable
-        #print(image)
-
-        # sikkerhetssjekk:
-        if image.filename == "":
-            print("Image must have a filename")
-            return redirect(request.url)
-      
-        if not allowed_cad(image.filename):
-            print("That image extention is not allowed")
-            return redirect(request.url) 
-
-        else:
-            filename = secure_filename(image.filename) # gi et nytt filnavn
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
-            print("Image from customer saved.") 
-
-
-        return redirect(request.url)
-    
-    return render_template("public/prtResult.html")
-"""
-"""
-@app.route("/prtResult", methods=["GET", "POST"])
-def prtRessult():
-    print("Inside prtResult")
-    #if request.method == "POST":
-    print("request.files: ", request.files)
-
-    
-    if request.method == "POST":
-        #getting the name, email, company from the order
-        req = request.form
-        print("req: ", req)
-
-        name =req["name"]
-        email = req["email"]
-        company = req["Company"]
-
-        print(name, email, company)
-        details = name.replace(" ", "_") + company.replace(" ", "_")
-    
-    if request.files:
-        print(request.cookies)
-        if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
-            print("File exeeded maximum size")
-            return redirect(request.url)
-
-        image = request.files["image"] #store the file in this variable
-        #print(image)
-
-        # sikkerhetssjekk:
-        if image.filename == "":
-            print("Image must have a filename")
-            return redirect(request.url)
-    
-        if not allowed_image(image.filename):
-            print("That image extention is not allowed")
-            return redirect(request.url) 
-
-        else:
-            filename = secure_filename(image.filename) # gi et nytt filnavn
-            #filename = details + filename
-            print(filename) 
-            image.save(os.path.join(app.config["PRT_FILES_UPLOAD"], filename))
-            
-            print("prt file from customer saved.")        
-
-        return redirect(request.url)
-    
-    return render_template("public/prtResult.html")
-"""
