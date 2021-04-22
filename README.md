@@ -21,6 +21,11 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 <img src="https://user-images.githubusercontent.com/77832956/115551909-f943a780-a2ab-11eb-8b2a-ec8bb10f177b.png">
 </p>
 
+<h2>UML Sequence Diagram</h2>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/77832956/115674167-aae6e500-a34d-11eb-9e72-1df951941983.png">
+</p>
+
 <h2>Program files with corresponding methods</h2>
 <br>
 <h3>FILE.py</h3>
