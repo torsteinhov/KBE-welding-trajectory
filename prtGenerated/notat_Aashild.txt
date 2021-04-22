@@ -1,0 +1,33 @@
+- to make a requirements file:
+    pip freeze > requirements.txt
+- to install the requirements
+    pip install -r requirements
+
+Navn på css: sylesheat.css
+
+
+Webbrowser: inspiser > network > check på Network (noe med chache)
+
+Jinja: default engine templates
+video6: 
+
+Further development:
+- suggest which is the best way to weld: hvilken rekkefølge er best å sveise i . 
+
+kommet til video9
+
+prøver nå å sette opp for vårt system, prøver meg på stringparsing på navn og email i imgOrder
+
+
+<img src="{{ url_for('static', filename='img/result.jpg') }}" alt="">
+
+app\static\img\result.jpg
+
+Nå lastes bilde inn
+
+Neste Få til log fil og prt-fil
+
+21-Apr-2021 (18:11:02.089234), Anna Akselsen, anna@akselsen.no, Akselsen AS, Anna_AkselsenAkselsen_ASmaze_test_3D.prt, None.
+21-Apr-2021 (18:11:40.349801), Bernt Knutsen, bernt@knutsen.no, Knutsen AS, Bernt_KnutsenKnutsen_ASmaze_v2.prt, None.
+21-Apr-2021 (18:12:17.974988), Cecilie Hoyer, cecilie@hoyer.no, Hoyer AS, Cecilie_HoyerHoyer_ASmaze_v3.prt, None.
+21-Apr-2021 (18:12:42.514783), Daniel Skog, daniel@skog.no, Skog AS, Daniel_SkogSkog_ASmaze_v4.prt, None.
