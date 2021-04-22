@@ -1,1 +1,9 @@
-2021-04-20 07:44:11.325586, Aashild Kolstad, aashild@ntnu.no, NTNU company, maze_test3.jpg, maze_test3.jpg.
+22-Apr-2021 (09:08:06.987847), Aashild Kolstad, aashild@ntnu.no, NTNU company, maze_test3.jpg, maze_test3.jpg.
+22-Apr-2021 (08:58:04.229752), Anna Mikalsen, anna@mikalsen.no, Mikalsen AS, Anna_MikalsenMikalsen_ASmaze_test_3D.prt, Anna_MikalsenMikalsen_ASmaze_test_3D_generated.prt.
+22-Apr-2021 (09:08:14.489386), Bjorn Vest, bjorn@vest.no, Vest AS, Bjorn_VestVest_ASmaze_v2.prt, Bjorn_VestVest_ASmaze_v2_generated.prt.
+22-Apr-2021 (09:08:27.161196), Catan Pan, catan@pan.no, Pan AS, Catan_PanPan_ASmaze_v3.prt, Catan_PanPan_ASmaze_v3_generated.prt.
+22-Apr-2021 (09:08:45.979529), Diana Gaup, diana@gaup.no, gaup AS, Diana_Gaupgaup_ASmaze_v4.prt, Diana_Gaupgaup_ASmaze_v4_generated.prt.
+22-Apr-2021 (09:16:43.481392), Eline suppe, eline@suppe.no, Suppe AS, Eline_suppeSuppe_ASmaze_test_3D.prt, Eline_suppeSuppe_ASmaze_test_3D_generated.prt.
+22-Apr-2021 (09:17:04.683532), Fredrik Danielsen, fred@dan.no, Danielsen AS, Fredrik_DanielsenDanielsen_ASmaze_v2.prt, Fredrik_DanielsenDanielsen_ASmaze_v2_generated.prt.
+22-Apr-2021 (09:17:27.396166), Gabriel brede, gabriel@brede.no, Brede AS, Gabriel_bredeBrede_ASmaze_v3.prt, Gabriel_bredeBrede_ASmaze_v3_generated.prt.
+22-Apr-2021 (09:17:51.629349), Hanne Falk, hanne@falk.no, Falk AS, Hanne_FalkFalk_ASmaze_v4.prt, Hanne_FalkFalk_ASmaze_v4_generated.prt.
