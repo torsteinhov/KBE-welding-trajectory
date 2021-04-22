@@ -16,10 +16,10 @@ from shapes.Sphere import Sphere
 from partReading import loadPRTFile, getFaces
 from lineSlicer import buildWeldingLines, removeBorderLines, findPoints, findBasePlane
 
-aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
-torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
-#andrei_path = <YOUR_PATH_HERE>
-yourLocation = torstein_path
+#aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+#torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
+processEngineer_path = <YOUR_PATH_HERE>
+yourLocation = processEngineer_path
 
 #testPlane = findBasePlane()
 #basePlaneWithoutBorders = removeBorderLines(testPlane)

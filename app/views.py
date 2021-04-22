@@ -10,10 +10,10 @@ from PIL import Image
 from datetime import date
 
 
-torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
-aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
-#andrei_path = <YOUR_PATH_HERE>
-yourLocation = torstein_path
+#torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
+#aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+processEngineer_path = <YOUR_PATH_HERE>
+yourLocation = processEngineer_path
 
 @app.template_filter("clean_date") #name of custom filter
 def clean_date(dt):
