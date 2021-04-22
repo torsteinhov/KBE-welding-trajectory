@@ -122,6 +122,7 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 <h3>Preparations before running:</h3>
 
 + Install all required libraries: ```pip install -r requirements.txt```
++ Add local path in ```views.py``` and ```prtGenerator.py```
 + Disable cache in local browser: ```Ctrl+Shift+I -> Network -> Press "Disable cache"```
 
 <h3>Run:</h3>
