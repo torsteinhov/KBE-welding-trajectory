@@ -142,7 +142,13 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 
 <h2>Further development</h2>
 
-
++	The updating and writing to logOrder.txt should be made bulletproof by not allowing white spaces and the letters "ÆØÅ".
++	Even though we are happy with the structure of the log file, we still think there are room for improvements. This is something we think comes with experience, and is very individually for each project.  
++	The timestamp in the logfile should be implemented when saving the corresponding file. As the program stands right now, the same user data can not upload a file twice.
++	The prtGenerator.py should be extended to work for all shapes. This means changes in the functions that does the calculation. We tried multiple fixes for this but with time limitations and limited knowledge in NX Open, this was the best solution for us.
++	There is a debug where occasionally, when adding multiple CAD orders to the logfile and running, it only manages to load the weld of the first one, on all the objects. This needs more debugging to fix, we are not quite sure of why this happens.
++	It would be cool if the program could be fully automated, so that we don’t need to run the website, aswell as the prtGenerator.py.
++	It should also be implemented a database to store the different files and user data.
 
 <h2>Conclusions from working on KBE Systems:</h2>
 
