@@ -12,7 +12,7 @@ from datetime import date
 
 torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
 aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
-yourLocation = aashild_path
+yourLocation = torstein_path
 
 @app.template_filter("clean_date") #name of custom filter
 def clean_date(dt):
