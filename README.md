@@ -146,4 +146,6 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 
 <h2>Conclusions from working on KBE Systems:</h2>
 
-+ 
++ It has been interesting working on automation of repetitive CAD operations in Siemens NX. We have learned that even though you have agreed on technology, libraries and architecture, the actual implementation of the logic may still present many challenges.
++ When completing the different projects it has been very rewarding. In all projects, we have seen the value of the programs we have made. It is very clearly a functional system that will cut down on cost and time for product development, aswell as improving product quality(precision) and redusing time to market. All of these aspects are goals that we want to achieve when making these KBE systems.
++ We have learned about the great potential that lies in the industry, regarding KBE systems. Automating tasks is something all industries are striving for, and with the possibilities that comes with computer programming, the experience and knowledge of colleagues can "easily" be interpret and used in algorithms.
