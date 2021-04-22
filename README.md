@@ -128,7 +128,9 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 <h3>Run:</h3>
 
 + Run run.py
-+ Interact with webpage, upload user data and file in the Generator tab
++ Interact with webpage, upload user data and files from in the Generator tab:
+  + test data is provided at: ```ImgWeldLinesGenerator\Img_mazes``` for image files
+  + test data is provided at: ```prt\testFiles``` for .prt files
 + **Image**:
   + Your image is processed and presented to you, usually takes about 5 seconds.
 + **CAD**:
