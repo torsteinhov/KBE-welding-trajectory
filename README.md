@@ -12,8 +12,8 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 
 2D maze (input)  |  2D maze with welding lines in cyan (output)
 :----------------------------:|:----------------------------:
-![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze3.jpg)  |  ![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze3_weldinglines.png)
-![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze4.jpg)  |  ![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze4_weldinglines.png)
+<img src="https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze3.jpg" width=78%> |  ![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze3_weldinglines.png)
+<img src="https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze4.jpg" width=82%>  |  ![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze4_weldinglines.png)
 
 <h2>Calculations</h2>
 
