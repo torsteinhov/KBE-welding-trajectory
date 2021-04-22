@@ -133,10 +133,17 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 + **CAD**:
   + Run prtGenerator.py in the Developer tab, in Siemens NX.
 
-<h2>Improvements from last project</h2>
+<h2>Improvements from previous KBE projects</h2>
 
-+ 
++ We upgraded to a new system regarding hosting the server and handling the HTML. This was mainly because we lacked functionality to upload files. The parsing of parameters was also more intuitive since the flask framework did a better job supporting this.
++ We did a much better job on agreeing on geometry and architecture early to avoid misunderstandings and complications during the development.
++ We have become better on supporting scalable solutions. We now strive to make functions as general as possible for increasing the chance of reusability aswell as making it scalable and KBE-friendly.
++ The UI is easier to interact with, supporting the Don Normans Principles of Design.
 
 <h2>Further development</h2>
+
+
+
+<h2>Conclusions from working on KBE Systems:</h2>
 
 + 
