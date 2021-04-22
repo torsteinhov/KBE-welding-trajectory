@@ -18,7 +18,7 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 
 <h2>Architecture</h2>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/77832956/115551909-f943a780-a2ab-11eb-8b2a-ec8bb10f177b.png">
+<img src="https://user-images.githubusercontent.com/77832956/115675298-c1da0700-a34e-11eb-88c4-8b991c29da0b.png">
 </p>
 
 <h2>UML Sequence Diagram</h2>
