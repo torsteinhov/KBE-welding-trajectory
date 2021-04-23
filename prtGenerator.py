@@ -16,10 +16,10 @@ from shapes.Sphere import Sphere
 from partReading import loadPRTFile, getFaces
 from lineSlicer import buildWeldingLines, removeBorderLines, findPoints, findBasePlane
 
-#aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
 #torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
-processEngineer_path = <YOUR_PATH_HERE>
-yourLocation = processEngineer_path
+#processEngineer_path = <YOUR_PATH_HERE>
+yourLocation = aashild_path
 
 #testPlane = findBasePlane()
 #basePlaneWithoutBorders = removeBorderLines(testPlane)
@@ -28,6 +28,7 @@ yourLocation = processEngineer_path
 #read logfile
 #loop for running  through new files
 
+# saving the opened file to a new name
 def saveGeneratedCADFile(path, filename):
     theSession  = NXOpen.Session.GetSession()
     workPart = theSession.Parts.Work
@@ -38,25 +39,29 @@ def saveGeneratedCADFile(path, filename):
     
     partSaveStatus1.Dispose()
 
+# getting info from the logfile about which orders that should be generated in NX
 def readlogFile(yourLocation):
     logfilePath = yourLocation + "\\LogOrder.txt" 
     if not path.exists(logfilePath):
         print("Error, logfile for production does not exist.")
         return
+
     f=open(logfilePath, "r")
     linesToBeGenerated = []
     for line in f:
-        if (".prt") in line and ("None" in line):
+        if (".prt") in line and ("None" in line): # getting thoose lines with prt-file and "None"
             lineList = line.split(", ")
             linesToBeGenerated.append(lineList)
     f.close()
     
     return linesToBeGenerated
 
+# updates the logfile after weldinglines is generated in NX
 def updateLogFile(order, newLogLine, yourLocation):
     nowObj = datetime.now()
     nowStr = nowObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
 
+    # putting the lists back to strings
     newLineInFile = nowStr + ", "
     oldLineInFile = ""
     for i in range(len(order)):
@@ -81,17 +86,16 @@ def updateLogFile(order, newLogLine, yourLocation):
     for line in lines:
 
         if line.strip("\n") != oldLineInFile:
-            #print("ikke det vi vil slette: ", line)
-            g.write(line)
+            g.write(line) #writing the lines back
     
     g.close()
-    f = open(logfilePath,"a")
+    f = open(logfilePath,"a") # adding the new line
     f.write(newLineInFile)
     f.close
 
 def main():
     global yourLocation
-    linesToBeGenerated = readlogFile(yourLocation)
+    linesToBeGenerated = readlogFile(yourLocation) #get files that need weldinglines
 
     for order in range(len(linesToBeGenerated)):
         print("\nNew order: ", linesToBeGenerated[order])
@@ -100,18 +104,18 @@ def main():
         pathOutFile = yourLocation + "\\prtGenerated\\"
         outfile = infile.split(".")[0]+"_generated"
         
-        testPlane = findBasePlane(pathInFile) #BØR HA PATH SOM INPUT PARAMETER?
+        # doing the generation
+        testPlane = findBasePlane(pathInFile)
         basePlaneWithoutBorders = removeBorderLines(testPlane)
         buildWeldingLines(basePlaneWithoutBorders)
         
+        # saving the generated file
         saveGeneratedCADFile(pathOutFile, outfile) 
-        #satser på at det går bra med flere filer
+        
         newLogLine = linesToBeGenerated[order].copy()
-        
         newLogLine[-1] = outfile + ".prt"
-        
         updateLogFile(linesToBeGenerated[order], newLogLine, yourLocation)
-        print("\nVi tar påskehelg")
+        print("\nProgram done!")
         
 if __name__ == '__main__':
     main()

@@ -37,16 +37,13 @@ def getFaces(theSession):
 	for partObject in theSession.Parts:
 		objects.append(processPart(partObject))
 	
-	#print("objects: \n", objects)
 	return objects
 		
 def processPart(partObject):
 	parts = []
 	for bodyObject in partObject.Bodies:
 		parts.append(processBodyFaces(bodyObject))
-		#processBodyEdges(bodyObject)
 	
-	#print("Parts: \n", parts)
 	return parts
 			
 def processBodyFaces(bodyObject):
@@ -54,31 +51,19 @@ def processBodyFaces(bodyObject):
 	for faceObject in bodyObject.GetFaces():
 		faces.append(processFace(faceObject))
 	
-	#print("Faces: \n", faces)
 	return faces
 			
 def processFace(faceObject):
-	#print("Face found.")
 	lines_in_face = []
 	for edgeObject in faceObject.GetEdges():
 		lines_in_face.append(processEdge(edgeObject))
-	#print("lines in face: \n", lines_in_face)
 	return lines_in_face
 		
 def processEdge(edgeObject):
-	#Printing vertices
 	v1 = edgeObject.GetVertices()[0]
 	v2 = edgeObject.GetVertices()[1] 
-	#print("Vertex 1:", v1)
-	#print("Vertex 2:", v2)
 
 	line =[v1,v2]
 	return line
 
-#if __name__ == '__main__':
-	#main()
-#theSession = loadPRTFile(path)
-#objects = getFaces(theSession)
-#aPoint= objects[0][0][0][0][0]
-#print("a Point: ", aPoint)
 

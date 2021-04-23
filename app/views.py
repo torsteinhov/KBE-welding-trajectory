@@ -11,32 +11,29 @@ from datetime import date
 
 
 #torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
-#aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
-processEngineer_path = <YOUR_PATH_HERE>
-yourLocation = processEngineer_path
+aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+#processEngineer_path = <YOUR_PATH_HERE>
+yourLocation = aashild_path
 
-@app.template_filter("clean_date") #name of custom filter
-def clean_date(dt):
-    return dt.strftime("%d %b %Y")
-
-@app.route("/")
+@app.route("/") # home page
 def index():
     
     return render_template("public/index.html")
 
-@app.route("/about")
+@app.route("/about") # about page
 def about():
     return render_template("public/about.html")
 
 
-@app.route("/imgOrder", methods=["GET", "POST"]) #imgOrder
+@app.route("/imgOrder", methods=["GET", "POST"]) # imgOrder page
 def imgOrder():
 
-    if request.method == "POST": 
+    if request.method == "POST":  # handels input form customer
 
         return redirect(request.url)
     return render_template("public/imgOrder.html")
 
+# some configurations for the website
 app.config["IMAGE_UPLOADS"] = yourLocation + "\\imgFromCustomer"
 app.config["SAVED_WELDINGLINES_IMAGES"] = yourLocation + "\\app\static\img"
 app.config["PRT_FILES_UPLOAD"] = yourLocation + "\\prt"
@@ -44,6 +41,7 @@ app.config["ALLOWED_IMAGE_EXTENTIONS"] = ["PNG", "JPG", "JPEG", "GIF", "PRT"]
 app.config["ALLOWED_CAD_EXTENTIONS"] = ["PRT"]
 app.config["MAX_IMAGE_FILESIZE"] = 20000000
 
+# checks if the filetype is allowed by us
 def allowed_image(filename):
   if not "." in filename:
     return False
@@ -54,6 +52,7 @@ def allowed_image(filename):
   else:
     return False
 
+# checks if the filetype is allowed by us
 def allowed_cad(filename):
   if not "." in filename:
     return False
@@ -64,6 +63,7 @@ def allowed_cad(filename):
   else:
     return False
 
+# checks if we allow the filetype
 def allowed_image_filesize(filesize):
 
   if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
@@ -101,7 +101,7 @@ def imgResult():
     print("request.files: ", request.files)
 
 
-    if request.files:
+    if request.files: # if there has been uploaded a file
         
         print(request.cookies)
         if not allowed_image_filesize(request.cookies["filesize"]): #sjekker filstørrelsen
@@ -123,6 +123,7 @@ def imgResult():
         else:
             filename = secure_filename(image.filename) # gi et nytt filnavn
 
+            # getting the data from the customer into variables we could handle --> string parsing
             name =request.form["name"]
             email = request.form["email"]
             company = request.form["Company"]
@@ -134,13 +135,15 @@ def imgResult():
                 print("Denne filen finnes")
                 os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
             
-
+            # checks if it is a cad-file
             if filename.split(".")[1] == "prt":
                 image.save(os.path.join(app.config["PRT_FILES_UPLOAD"], details+filename))
                 print("PRT-file from customer saved.")
                 updatLogFile(name,email, company,details+filename,"None")
 
-                return render_template("public/prtResult.html")
+                return render_template("public/prtResult.html") # redirect the customer to this page
+
+            # assuming it is a image
             else:
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
                 print("Image from customer saved.") 
@@ -160,6 +163,8 @@ def imgResult():
                 runImgGenerator(app.config["IMAGE_UPLOADS"]+"\\"+filename, app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg" ) # saving the generated image as "result.jpg"
                 print("Image grenerator is done.")
                 saveFileNewName(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg", app.config["SAVED_WELDINGLINES_IMAGES"] +"\\"+savename)
+                
+                #updating the logfile
                 updatLogFile(name,email,company,filename,savename)
 
         return redirect(request.url)
