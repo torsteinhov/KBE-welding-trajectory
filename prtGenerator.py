@@ -21,13 +21,6 @@ from lineSlicer import buildWeldingLines, removeBorderLines, findPoints, findBas
 processEngineer_path = <YOUR_PATH_HERE>
 yourLocation = processEngineer_path
 
-#testPlane = findBasePlane()
-#basePlaneWithoutBorders = removeBorderLines(testPlane)
-#buildWeldingLines(basePlaneWithoutBorders)
-#print("Vi tar påskehelg")
-#read logfile
-#loop for running  through new files
-
 # saving the opened file to a new name
 def saveGeneratedCADFile(path, filename):
     theSession  = NXOpen.Session.GetSession()
