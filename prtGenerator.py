@@ -21,13 +21,6 @@ from lineSlicer import buildWeldingLines, removeBorderLines, findPoints, findBas
 processEngineer_path = <YOUR_PATH_HERE>
 yourLocation = processEngineer_path
 
-#testPlane = findBasePlane()
-#basePlaneWithoutBorders = removeBorderLines(testPlane)
-#buildWeldingLines(basePlaneWithoutBorders)
-#print("Vi tar påskehelg")
-#read logfile
-#loop for running  through new files
-
 def saveGeneratedCADFile(path, filename):
     theSession  = NXOpen.Session.GetSession()
     workPart = theSession.Parts.Work
@@ -81,7 +74,6 @@ def updateLogFile(order, newLogLine, yourLocation):
     for line in lines:
 
         if line.strip("\n") != oldLineInFile:
-            #print("ikke det vi vil slette: ", line)
             g.write(line)
     
     g.close()
@@ -100,12 +92,12 @@ def main():
         pathOutFile = yourLocation + "\\prtGenerated\\"
         outfile = infile.split(".")[0]+"_generated"
         
-        testPlane = findBasePlane(pathInFile) #BØR HA PATH SOM INPUT PARAMETER?
+        testPlane = findBasePlane(pathInFile)
         basePlaneWithoutBorders = removeBorderLines(testPlane)
         buildWeldingLines(basePlaneWithoutBorders)
         
         saveGeneratedCADFile(pathOutFile, outfile) 
-        #satser på at det går bra med flere filer
+        
         newLogLine = linesToBeGenerated[order].copy()
         
         newLogLine[-1] = outfile + ".prt"

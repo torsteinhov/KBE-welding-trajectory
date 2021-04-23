@@ -108,10 +108,9 @@ def imgResult():
             print("File exeeded maximum size")
             return redirect(request.url)
 
-        image = request.files["image"] #store the file in this variable
-        #print(image)
+        image = request.files["image"] #stores the file in this variable
 
-        # sikkerhetssjekk:
+        # safetycheck:
         if image.filename == "":
             print("Image must have a filename")
             return redirect(request.url)
@@ -121,7 +120,7 @@ def imgResult():
             return redirect(request.url) 
 
         else:
-            filename = secure_filename(image.filename) # gi et nytt filnavn
+            filename = secure_filename(image.filename) # gives a new filename
 
             name =request.form["name"]
             email = request.form["email"]
@@ -130,7 +129,7 @@ def imgResult():
             print(name, email, company)
             details = name.replace(" ", "_") + company.replace(" ", "_")
 
-            if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"): # this is suppose to dele the result file. 
+            if path.exists(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg"): # this deletes the result file
                 print("Denne filen finnes")
                 os.remove(app.config["SAVED_WELDINGLINES_IMAGES"] +"\\result.jpg")
             
@@ -165,4 +164,3 @@ def imgResult():
         return redirect(request.url)
     
     return render_template("public/imgResult.html")
-
