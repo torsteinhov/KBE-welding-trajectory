@@ -15,25 +15,6 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 <img src="https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze3.jpg" width=78%> |  ![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze3_weldinglines.png)
 <img src="https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze4.jpg" width=82%>  |  ![](https://github.com/torsteinhov/KBE-welding-trajectory/blob/main/product_photos/2Dmaze4_weldinglines.png)
 
-<h2>How to run:</h2>
-
-<h3>Preparations before running:</h3>
-
-+ Install all required libraries: ```pip install -r requirements.txt```
-+ Add local path in ```views.py``` and ```prtGenerator.py```
-+ Disable cache in local browser: ```Ctrl+Shift+I -> Network -> Press "Disable cache"```
-
-<h3>Run:</h3>
-
-+ Run run.py
-+ Interact with webpage, upload user data and files from in the Generator tab:
-  + test data is provided at: ```ImgWeldLinesGenerator\Img_mazes``` for image files
-  + test data is provided at: ```prt\testFiles``` for .prt files
-+ **Image**:
-  + Your image is processed and presented to you, usually takes about 5 seconds.
-+ **CAD**:
-  + Run prtGenerator.py in the Developer tab, in Siemens NX.
-
 <h2>Calculations</h2>
 
 <h3>Image Processing:</h3>
@@ -135,6 +116,25 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
 | readLogFile(yourLocation) | reads the log file(represents manufacturing order) and locates which files that have not been generated|
 | updateLogFile(order, newLogLine, yourLocation) | updates the log file such that generated part files gets marked as generated, and therefore will not be generated next iteration |
 | main() | runs the functions such that the new file gets modified in the logFile and saved as a new .prt file |
+
+<h2>How to run:</h2>
+
+<h3>Preparations before running:</h3>
+
++ Install all required libraries: ```pip install -r requirements.txt```
++ Add local path in ```views.py``` and ```prtGenerator.py```
++ Disable cache in local browser: ```Ctrl+Shift+I -> Network -> Press "Disable cache"```
+
+<h3>Run:</h3>
+
++ Run run.py
++ Interact with webpage, upload user data and files from in the Generator tab:
+  + test data is provided at: ```ImgWeldLinesGenerator\Img_mazes``` for image files
+  + test data is provided at: ```prt\testFiles``` for .prt files
++ **Image**:
+  + Your image is processed and presented to you, usually takes about 5 seconds.
++ **CAD**:
+  + Run prtGenerator.py in the Developer tab, in Siemens NX.
 
 <h2>Improvements from previous KBE projects</h2>
 

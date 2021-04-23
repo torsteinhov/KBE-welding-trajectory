@@ -7,3 +7,5 @@
 22-Apr-2021 (09:17:04.683532), Fredrik Danielsen, fred@dan.no, Danielsen AS, Fredrik_DanielsenDanielsen_ASmaze_v2.prt, Fredrik_DanielsenDanielsen_ASmaze_v2_generated.prt.
 22-Apr-2021 (09:17:27.396166), Gabriel brede, gabriel@brede.no, Brede AS, Gabriel_bredeBrede_ASmaze_v3.prt, Gabriel_bredeBrede_ASmaze_v3_generated.prt.
 22-Apr-2021 (09:17:51.629349), Hanne Falk, hanne@falk.no, Falk AS, Hanne_FalkFalk_ASmaze_v4.prt, Hanne_FalkFalk_ASmaze_v4_generated.prt.
+22-apr-2021 (18:25:04.722501), Jorgen Mo, jorgen.mo@gmail.com, ChamonixAS, Jorgen_MoChamonixASmaze_v4.prt, Jorgen_MoChamonixASmaze_v4_generated.prt.
+22-Apr-2021 (18:26:21.560314), Torstein Hovde, torstein.hovde@gmail.com, orginalAS, maze_test3.jpg, maze_test3.jpg.

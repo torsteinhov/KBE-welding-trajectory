@@ -71,5 +71,3 @@ def runImgGenerator(filename, saveName):
     binaryMaze = convert2binary(filename)
     pixels = makeWeldLines(binaryMaze)
     convert2Img(pixels, saveName)
-
-#runImgGenerator("ImgWeldLinesGenerator\\img_mazes\\maze_test2.png")

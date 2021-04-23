@@ -11,10 +11,6 @@ from shapes.Sphere import Sphere
 
 from partReading import loadPRTFile, getFaces
 
-#aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory\\prt\\maze_test_3D.prt"
-#torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory\\prt\\maze_v4.prt"
-#path = torstein_path
-
 # find the face with most lines
 def findBasePlane(path):
     theSession = loadPRTFile(path)
@@ -56,12 +52,12 @@ def findPoints(line):
     return twoPoints
 
 
+#removes the lines from the edge of the base plane
 def removeBorderLines(basePlane):
     basePlaneCopy = basePlane
     lineNumberIndex = 0
     x_length = 0
     for i, line in enumerate(basePlaneCopy):
-
         points = findPoints(line)
         if abs(points[0][0]-points[1][0]) > x_length:
             x_length = abs(points[0][0]-points[1][0])
@@ -103,6 +99,7 @@ def removeBorderLines(basePlane):
 
     return basePlaneCopy #weldinglines
 
+# takes in the welding lines and by looping through, builds cylinders and spheres to illustrate the weld visually in NX
 def buildWeldingLines(weldinglines):
     for line in weldinglines:
         points = findPoints(line)
