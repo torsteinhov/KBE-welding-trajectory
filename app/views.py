@@ -11,9 +11,9 @@ from datetime import date
 
 
 #torstein_path = "C:\\Kode\GitHub\\KBE-welding-trajectory"
-aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
-#processEngineer_path = <YOUR_PATH_HERE>
-yourLocation = aashild_path
+#aashild_path = "C:\\Users\\Hilde\\OneDrive - NTNU\\Fag\\KBE2\\KBE-welding-trajectory"
+processEngineer_path = <YOUR_PATH_HERE>
+yourLocation = processEngineer_path
 
 @app.route("/") # home page
 def index():
