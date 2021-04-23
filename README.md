@@ -33,6 +33,14 @@ Welding lines maze example 1  |  Welding lines maze example 2   |  Welding lines
   + Your image is processed and presented to you, usually takes about 5 seconds.
 + **CAD**:
   + Run prtGenerator.py in the Developer tab, in Siemens NX.
+ 
+
+<h2>User Interface</h2>
+
+Start page  |  Generator page
+:----------------------------:|:----------------------------:
+<img src="https://user-images.githubusercontent.com/77832956/115842564-3cbe2300-a41e-11eb-8c12-986830f26f23.jpg" width=100%> |  ![](https://user-images.githubusercontent.com/77832956/115842601-48114e80-a41e-11eb-878e-b97c349ae885.jpg)
+
 
 <h2>Calculations</h2>
 
