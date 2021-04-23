@@ -15,11 +15,13 @@ from partReading import loadPRTFile, getFaces
 def findBasePlane(path):
     theSession = loadPRTFile(path)
     objects = getFaces(theSession)
+    aPoint= objects[0][0][0][0][0]
 
     basePlane = []
     for parts in objects:
         for faces in parts:
             for lines_in_face in faces:
+                
                 if len(lines_in_face) > len(basePlane):
                     basePlane= lines_in_face
 
@@ -31,6 +33,9 @@ def findPoints(line):
 
     #must make point a iterable object
     for j in range(2): #point in line:
+
+        #securety
+        #if type(line) == <class 'NXOpen.Point3d'>:
 
         strPoint = str(line[j])
         strPoint = strPoint.split(",")
@@ -46,12 +51,6 @@ def findPoints(line):
     
     return twoPoints
 
-'''
-For illustration purposes only, this is to keep track of the structure of the different lists,
-#basePlane = [line,line,line,line,line]
-#line = [[x=50,y=100,z=0],[x=50,y=100,z=0],[x=50,y=100,z=0]]
-#point = [x=50,y=100,z=0]
-'''
 
 #removes the lines from the edge of the base plane
 def removeBorderLines(basePlane):
@@ -63,11 +62,14 @@ def removeBorderLines(basePlane):
         if abs(points[0][0]-points[1][0]) > x_length:
             x_length = abs(points[0][0]-points[1][0])
             lineNumberIndex = i
+
     borderLines = [] #[line, line]
     borderLines.append(findPoints(basePlaneCopy.pop(lineNumberIndex)))
 
+
     x_length = 0
     for i, line in enumerate(basePlaneCopy):
+
         points = findPoints(line)
         if abs(points[0][0]-points[1][0]) > x_length:
             x_length = abs(points[0][0]-points[1][0])
@@ -118,3 +120,4 @@ def buildWeldingLines(weldinglines):
 
         corners = Sphere(endPoint[0], endPoint[1], endPoint[2], weldingDia, "YELLOW", "Wood")
         corners.initForNX()
+

@@ -36,7 +36,7 @@ def processPart(partObject):
 	parts = []
 	for bodyObject in partObject.Bodies:
 		parts.append(processBodyFaces(bodyObject))
-
+	
 	return parts
 			
 def processBodyFaces(bodyObject):
@@ -47,17 +47,16 @@ def processBodyFaces(bodyObject):
 	return faces
 			
 def processFace(faceObject):
-
 	lines_in_face = []
 	for edgeObject in faceObject.GetEdges():
 		lines_in_face.append(processEdge(edgeObject))
-
 	return lines_in_face
 		
 def processEdge(edgeObject):
-	#Printing vertices
 	v1 = edgeObject.GetVertices()[0]
 	v2 = edgeObject.GetVertices()[1] 
 
 	line =[v1,v2]
 	return line
+
+
